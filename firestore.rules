@@ -1,0 +1,169 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // 0. Default deny
+    match /{document=**} {
+      allow read, write: if false;
+    }
+
+    // 1. Primitive Helpers
+    function isSignedIn() {
+      return request.auth != null;
+    }
+
+    function isVerified() {
+      return isSignedIn() && request.auth.token.email_verified == true;
+    }
+
+    function isAdmin() {
+      return isVerified() && exists(/databases/$(database)/documents/admins/$(request.auth.uid));
+    }
+
+    function isValidId(id) {
+      return id is string && id.size() <= 128 && id.matches('^[a-zA-Z0-9_\\-]+$');
+    }
+
+    function incoming() {
+      return request.resource.data;
+    }
+
+    function existing() {
+      return resource.data;
+    }
+
+    // 2. Entity Validators
+    function isValidDestination(data) {
+      return data.keys().hasAll(['from', 'to', 'priceOneWay', 'priceReturn', 'days', 'time', 'status'])
+        && data.from is string && data.from.size() <= 100
+        && data.to is string && data.to.size() <= 100
+        && data.priceOneWay is number
+        && data.priceReturn is number
+        && data.days is string && data.days.size() <= 200
+        && data.time is string && data.time.size() <= 10
+        && data.status in ['Actif', 'Inactif'];
+    }
+
+    function isValidAgency(data) {
+      return data.keys().hasAll(['city', 'address', 'quartier'])
+        && data.city is string && data.city.size() <= 100
+        && data.address is string && data.address.size() <= 500
+        && data.quartier is string && data.quartier.size() <= 100;
+    }
+
+    function isValidPackage(data) {
+      return data.keys().hasAll(['trackingNumber', 'sender', 'receiver', 'route', 'status', 'date'])
+        && data.trackingNumber is string && data.trackingNumber.size() <= 50
+        && data.sender is string && data.sender.size() <= 200
+        && data.receiver is string && data.receiver.size() <= 200
+        && data.route is string && data.route.size() <= 200
+        && data.status in ['En attente', 'En transit', 'Livré']
+        && data.date is string;
+    }
+
+    function isValidArticle(data) {
+        return data.keys().hasAll(['title', 'date', 'status', 'summary'])
+            && data.title is string && data.title.size() <= 300
+            && data.date is string
+            && data.status in ['Publié', 'Brouillon']
+            && data.summary is string && data.summary.size() <= 5000;
+    }
+
+    function isValidGalleryImage(data) {
+        return data.keys().hasAll(['url', 'category', 'title'])
+            && data.url is string && data.url.size() <= 1000
+            && data.category is string && data.category.size() <= 50
+            && data.title is string && data.title.size() <= 200;
+    }
+
+    function isValidService(data) {
+      return data.keys().hasAll(['title', 'desc', 'icon'])
+        && data.title is string && data.title.size() <= 200
+        && data.desc is string && data.desc.size() <= 2000
+        && data.icon is string && data.icon.size() <= 100;
+    }
+
+    function isValidSiteSettings(data) {
+        return data.phone is string
+            && data.whatsapp is string
+            && data.heroTitle is string
+            && data.heroSubtitle is string
+            && data.heroImageUrl is string;
+    }
+
+    function isValidHomepageConfig(data) {
+        return (data.keys().hasAny(['title', 'subtitle', 'imageUrl']) || data.keys().hasAny(['name', 'slogan', 'phone', 'whatsapp', 'email']))
+            && (!('title' in data) || (data.title is string && data.title.size() <= 1000))
+            && (!('subtitle' in data) || (data.subtitle is string && data.subtitle.size() <= 2000))
+            && (!('imageUrl' in data) || (data.imageUrl is string && data.imageUrl.size() <= 1000))
+            && (!('name' in data) || (data.name is string && data.name.size() <= 200))
+            && (!('slogan' in data) || (data.slogan is string && data.slogan.size() <= 500))
+            && (!('phone' in data) || (data.phone is string && data.phone.size() <= 50))
+            && (!('whatsapp' in data) || (data.whatsapp is string && data.whatsapp.size() <= 50))
+            && (!('email' in data) || (data.email is string && data.email.size() <= 200));
+    }
+
+    // 3. Collection Rules
+    match /destinations/{destId} {
+      allow read: if true;
+      allow create: if isAdmin() && isValidId(destId) && isValidDestination(incoming()) && incoming().createdAt == request.time;
+      allow update: if isAdmin() && isValidId(destId) && isValidDestination(incoming()) && incoming().updatedAt == request.time;
+      allow delete: if isAdmin();
+    }
+
+    match /agencies/{agencyId} {
+      allow read: if true;
+      allow create: if isAdmin() && isValidId(agencyId) && isValidAgency(incoming()) && incoming().createdAt == request.time;
+      allow update: if isAdmin() && isValidId(agencyId) && isValidAgency(incoming()) && incoming().updatedAt == request.time;
+      allow delete: if isAdmin();
+    }
+
+    match /packages/{pkgId} {
+      allow list: if isAdmin();
+      allow get: if true; // Public tracking
+      allow create: if isAdmin() && isValidId(pkgId) && isValidPackage(incoming()) && incoming().createdAt == request.time;
+      allow update: if isAdmin() && isValidId(pkgId) && isValidPackage(incoming()) && (
+        // Action: Generic update (all fields except immutable ones)
+        (existing().status != 'Livré' && incoming().diff(existing()).affectedKeys().hasAny(['status', 'updatedAt']) && incoming().trackingNumber == existing().trackingNumber)
+        ||
+        // Action: Terminal state lock (can't move back from Livré)
+        (existing().status == 'Livré' && false)
+      ) && incoming().updatedAt == request.time;
+      allow delete: if isAdmin();
+    }
+
+    match /news/{articleId} {
+      allow read: if true;
+      allow create: if isAdmin() && isValidId(articleId) && isValidArticle(incoming()) && incoming().createdAt == request.time;
+      allow update: if isAdmin() && isValidId(articleId) && isValidArticle(incoming()) && incoming().updatedAt == request.time;
+      allow delete: if isAdmin();
+    }
+
+    match /gallery/{imageId} {
+      allow read: if true;
+      allow create: if isAdmin() && isValidId(imageId) && isValidGalleryImage(incoming()) && incoming().createdAt == request.time;
+      allow delete: if isAdmin();
+    }
+
+    match /services/{serviceId} {
+      allow read: if true;
+      allow create: if isAdmin() && isValidId(serviceId) && isValidService(incoming()) && incoming().createdAt == request.time;
+      allow update: if isAdmin() && isValidId(serviceId) && isValidService(incoming()) && incoming().updatedAt == request.time;
+      allow delete: if isAdmin();
+    }
+    
+    match /site_settings/{settingsId} {
+      allow read: if true;
+      allow write: if isAdmin() && isValidSiteSettings(incoming());
+    }
+    
+    match /homepage_config/{configId} {
+      allow read: if true;
+      allow write: if isAdmin() && isValidId(configId) && isValidHomepageConfig(incoming()) && incoming().updatedAt == request.time;
+    }
+
+    match /admins/{userId} {
+      allow read: if isVerified() && userId == request.auth.uid;
+      allow write: if false;
+    }
+  }
+}

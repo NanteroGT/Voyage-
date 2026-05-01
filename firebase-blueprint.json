@@ -1,0 +1,199 @@
+{
+  "entities": {
+    "Destination": {
+      "title": "Destination",
+      "description": "Représente un trajet proposé par Nzoko Transport.",
+      "type": "object",
+      "properties": {
+        "from": { "type": "string" },
+        "to": { "type": "string" },
+        "priceOneWay": { "type": "number" },
+        "priceReturn": { "type": "number" },
+        "days": { "type": "string" },
+        "time": { "type": "string" },
+        "status": { "type": "string", "enum": ["Actif", "Inactif"] },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["from", "to", "priceOneWay", "priceReturn", "days", "time", "status"]
+    },
+    "Agency": {
+      "title": "Agency",
+      "description": "Représente une agence physique de Nzoko Transport.",
+      "type": "object",
+      "properties": {
+        "city": { "type": "string" },
+        "address": { "type": "string" },
+        "quartier": { "type": "string" },
+        "phone": { "type": "string" },
+        "whatsapp": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["city", "address", "quartier"]
+    },
+    "Package": {
+      "title": "Package",
+      "description": "Représente un colis en cours d'envoi.",
+      "type": "object",
+      "properties": {
+        "trackingNumber": { "type": "string" },
+        "sender": { "type": "string" },
+        "receiver": { "type": "string" },
+        "route": { "type": "string" },
+        "status": { "type": "string", "enum": ["En attente", "En transit", "Livré"] },
+        "date": { "type": "string", "format": "date" },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["trackingNumber", "sender", "receiver", "route", "status", "date"]
+    },
+    "Article": {
+      "title": "Article",
+      "description": "Un article d'actualité pour le blog.",
+      "type": "object",
+      "properties": {
+        "title": { "type": "string" },
+        "date": { "type": "string", "format": "date" },
+        "status": { "type": "string", "enum": ["Publié", "Brouillon"] },
+        "imageUrl": { "type": "string" },
+        "summary": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["title", "date", "status", "summary"]
+    },
+    "GalleryImage": {
+      "title": "GalleryImage",
+      "description": "Une image dans la galerie photo.",
+      "type": "object",
+      "properties": {
+        "url": { "type": "string" },
+        "category": { "type": "string" },
+        "title": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["url", "category", "title"]
+    },
+    "Admin": {
+      "title": "Admin",
+      "description": "Utilisateurs autorisés à accéder à l'interface admin.",
+      "type": "object",
+      "properties": {
+        "email": { "type": "string" }
+      },
+      "required": ["email"]
+    },
+    "Service": {
+      "title": "Service",
+      "description": "Un engagement ou service proposé.",
+      "type": "object",
+      "properties": {
+        "title": { "type": "string" },
+        "desc": { "type": "string" },
+        "icon": { "type": "string" }
+      },
+      "required": ["title", "desc", "icon"]
+    },
+    "Testimonial": {
+      "title": "Testimonial",
+      "description": "Un avis client.",
+      "type": "object",
+      "properties": {
+        "name": { "type": "string" },
+        "text": { "type": "string" },
+        "rating": { "type": "number" }
+      },
+      "required": ["name", "text", "rating"]
+    },
+    "FAQ": {
+      "title": "FAQ",
+      "description": "Une question fréquente.",
+      "type": "object",
+      "properties": {
+        "question": { "type": "string" },
+        "answer": { "type": "string" }
+      },
+      "required": ["question", "answer"]
+    },
+    "SiteSettings": {
+      "title": "SiteSettings",
+      "description": "Configuration globale du site (logo, téléphone, etc).",
+      "type": "object",
+      "properties": {
+        "phone": { "type": "string" },
+        "whatsapp": { "type": "string" },
+        "logoUrl": { "type": "string" },
+        "heroTitle": { "type": "string" },
+        "heroSubtitle": { "type": "string" },
+        "heroImageUrl": { "type": "string" }
+      }
+    },
+    "HomepageConfig": {
+      "title": "HomepageConfig",
+      "description": "Configuration dynamique du site.",
+      "type": "object",
+      "properties": {
+        "title": { "type": "string" },
+        "subtitle": { "type": "string" },
+        "imageUrl": { "type": "string" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      }
+    }
+  },
+  "firestore": {
+    "destinations/{destinationId}": {
+      "schema": "Destination",
+      "description": "Liste des trajets disponibles."
+    },
+    "agencies/{agencyId}": {
+      "schema": "Agency",
+      "description": "Liste des agences physiques."
+    },
+    "packages/{packageId}": {
+      "schema": "Package",
+      "description": "Suivi des colis."
+    },
+    "news/{articleId}": {
+      "schema": "Article",
+      "description": "Articles d'actualités."
+    },
+    "gallery/{imageId}": {
+      "schema": "GalleryImage",
+      "description": "Photos de la galerie."
+    },
+    "services/{serviceId}": {
+      "schema": "Service",
+      "description": "Liste des services / engagements."
+    },
+    "testimonials/{testimonialId}": {
+      "schema": "Testimonial",
+      "description": "Avis clients."
+    },
+    "faqs/{faqId}": {
+      "schema": "FAQ",
+      "description": "Questions fréquentes."
+    },
+    "site_settings/{settingsId}": {
+      "schema": "SiteSettings",
+      "description": "Paramètres globaux du site."
+    },
+    "admins/{email}": {
+      "schema": "Admin",
+      "description": "Utilisateurs admin."
+    },
+    "homepage_config/{configId}": {
+      "schema": "HomepageConfig",
+      "description": "Paramètres du site."
+    },
+    "admins/{userId}": {
+      "schema": {
+        "type": "object",
+        "properties": {
+          "email": { "type": "string" }
+        }
+      },
+      "description": "Liste des administrateurs autorisés."
+    }
+  }
+}
