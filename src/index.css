@@ -2,8 +2,19 @@
 @import "tailwindcss";
 
 @theme {
-  --color-navy: #0A1128;
-  --color-gold: #FFB800;
+  --color-brand-dark: #0A1C27;
+  --color-brand-yellow: #EBA41A;
+  --color-brand-cream: #F4F1EA;
+  
   --font-sans: "Poppins", ui-sans-serif, system-ui, sans-serif;
   --font-heading: "Montserrat", sans-serif;
+}
+
+@layer base {
+  body {
+    @apply font-sans text-slate-800 bg-brand-cream;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-heading tracking-tight;
+  }
 }

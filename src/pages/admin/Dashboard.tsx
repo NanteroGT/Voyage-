@@ -1,65 +1,94 @@
-import { Users, Bus, MapPin, Search } from 'lucide-react';
+import { Package, Truck, Clock, Users } from 'lucide-react';
+import { useState, useEffect } from 'react';
+import { collection, query, getDocs } from 'firebase/firestore';
+import { db } from '../../lib/firebase';
+import { Link } from 'react-router-dom';
 
 export default function Dashboard() {
-  const stats = [
-    { name: 'Destinations Actives', value: '8', icon: Bus, change: '+2 cette semaine' },
-    { name: 'Agences', value: '4', icon: MapPin, change: 'Stable' },
-    { name: 'Visiteurs (Mois)', value: '12 450', icon: Users, change: '+15% par rapport au mois dernier' },
+  const [stats, setStats] = useState({
+    totalPackages: 0,
+    inTransit: 0,
+    delivered: 0,
+    users: 0
+  });
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchStats = async () => {
+      try {
+        const pkgsSnap = await getDocs(collection(db, 'packages'));
+        const usersSnap = await getDocs(collection(db, 'admins'));
+
+        let ts = 0, it = 0, del = 0;
+        pkgsSnap.forEach(doc => {
+          ts++;
+          const data = doc.data();
+          if (data.currentStatus === 'in_transit' || data.currentStatus === 'out_for_delivery') it++;
+          if (data.currentStatus === 'delivered') del++;
+        });
+
+        setStats({
+          totalPackages: ts,
+          inTransit: it,
+          delivered: del,
+          users: usersSnap.size
+        });
+      } catch (err) {
+        console.error("Error fetching stats:", err);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchStats();
+  }, []);
+
+  const statCards = [
+    { name: 'Total Colis', value: stats.totalPackages, icon: Package, color: 'text-blue-600', bg: 'bg-blue-100' },
+    { name: 'En Transit', value: stats.inTransit, icon: Truck, color: 'text-amber-600', bg: 'bg-amber-100' },
+    { name: 'Livrés', value: stats.delivered, icon: Clock, color: 'text-green-600', bg: 'bg-green-100' },
+    { name: 'Admins', value: stats.users, icon: Users, color: 'text-purple-600', bg: 'bg-purple-100' },
   ];
 
-  return (
-    <div>
-      <div className="mb-8 flex justify-between items-center w-full">
-        <h1 className="text-2xl font-bold text-navy">Tableau de bord</h1>
-        
-        <div className="relative hidden sm:block w-64">
-          <input
-            type="text"
-            className="block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-md leading-5 bg-white placeholder-gray-500 focus:outline-none focus:placeholder-gray-400 focus:ring-1 focus:ring-navy focus:border-navy sm:text-sm"
-            placeholder="Rechercher..."
-          />
-          <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-            <Search className="h-4 w-4 text-gray-400" />
-          </div>
-        </div>
-      </div>
+  if (loading) {
+    return <div className="p-8 text-center"><div className="animate-pulse flex flex-col items-center"><div className="h-8 w-8 bg-amber-500 rounded-full mb-4"></div><p>Chargement du tableau de bord...</p></div></div>;
+  }
 
-      <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3 mb-8">
-        {stats.map((item) => (
-          <div key={item.name} className="bg-white overflow-hidden shadow rounded-xl border border-gray-100">
-            <div className="p-5">
+  return (
+    <div className="space-y-6">
+      <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        {statCards.map((item) => {
+          const Icon = item.icon;
+          return (
+            <div key={item.name} className="bg-white overflow-hidden shadow-sm rounded-2xl border border-slate-100 p-6">
               <div className="flex items-center">
-                <div className="flex-shrink-0">
-                  <div className="w-12 h-12 rounded-lg bg-navy/5 flex items-center justify-center">
-                    <item.icon className="h-6 w-6 text-navy" />
-                  </div>
+                <div className={`p-4 rounded-xl ${item.bg}`}>
+                  <Icon className={`h-8 w-8 ${item.color}`} />
                 </div>
                 <div className="ml-5 w-0 flex-1">
                   <dl>
-                    <dt className="text-sm font-medium text-gray-500 truncate">
-                      {item.name}
-                    </dt>
-                    <dd>
-                      <div className="text-2xl font-bold text-navy">
-                        {item.value}
-                      </div>
-                    </dd>
+                    <dt className="text-sm font-medium text-slate-500 truncate pb-1">{item.name}</dt>
+                    <dd className="text-3xl font-black text-slate-900">{item.value}</dd>
                   </dl>
                 </div>
               </div>
             </div>
-            <div className="bg-gray-50 px-5 py-3 border-t border-gray-100">
-              <div className="text-xs text-gray-500">
-                {item.change}
-              </div>
-            </div>
-          </div>
-        ))}
+          );
+        })}
       </div>
 
-      <div className="bg-white rounded-xl shadow border border-gray-100 p-6">
-        <h2 className="text-lg font-bold text-navy mb-4">Activité récente</h2>
-        <p className="text-gray-500 text-sm">Votre tableau de bord est prêt. Utilisez le menu latéral pour gérer le contenu de votre site web vitrine.</p>
+      <div className="bg-white rounded-2xl shadow-sm border border-slate-100 p-8 text-center mt-12">
+        <h2 className="text-2xl font-bold text-slate-900 mb-4">Bienvenue sur votre espace d'administration</h2>
+        <p className="text-slate-600 mb-8 max-w-2xl mx-auto">
+          Depuis ce tableau de bord, vous pouvez enregistrer les nouveaux colis, mettre à jour leur statut d'expédition, et gérer les membres de l'équipe qui ont accès à cet espace.
+        </p>
+        <div className="flex justify-center space-x-4">
+          <Link to="/admin/packages" className="bg-amber-500 text-white px-8 py-3 rounded-lg font-bold hover:bg-amber-600 shadow-sm transition-colors">
+            Gérer les Colis
+          </Link>
+          <Link to="/admin/users" className="bg-slate-900 text-white px-8 py-3 rounded-lg font-bold hover:bg-slate-800 shadow-sm transition-colors">
+            Gérer les Admins
+          </Link>
+        </div>
       </div>
     </div>
   );
