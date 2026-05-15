@@ -1,11 +1,13 @@
 import { Link, useLocation } from 'react-router-dom';
 import { Bus, Menu, X, Phone, Mail } from 'lucide-react';
 import { useState, useEffect } from 'react';
+import { useSettings } from '../../lib/useSettings';
 
 export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const location = useLocation();
+  const { settings } = useSettings();
 
   useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 20);
@@ -26,7 +28,7 @@ export default function Navbar() {
       {/* Top Bar for Contact Info */}
       <div className="hidden lg:flex bg-brand-dark text-slate-300 py-2 px-8 text-sm justify-between items-center fixed w-full top-0 z-50">
         <div className="flex items-center space-x-6">
-          <span className="flex items-center"><Phone size={14} className="mr-2 text-brand-yellow" /> +242 06 167 1X XX</span>
+          <span className="flex items-center"><Phone size={14} className="mr-2 text-brand-yellow" /> {settings?.phone || '+242 06 167 1X XX'}</span>
           <span className="flex items-center"><Mail size={14} className="mr-2 text-brand-yellow" /> contact@nzokotransport.com</span>
         </div>
         <div>
@@ -40,12 +42,16 @@ export default function Navbar() {
           <div className="flex justify-between items-center">
             {/* Logo */}
             <Link to="/" className="flex items-center space-x-3">
-              <div className="bg-brand-dark p-2.5 rounded-xl flex items-center justify-center">
-                <Bus className="text-brand-yellow h-6 w-6" />
-              </div>
+              {settings?.logoUrl ? (
+                <img src={settings.logoUrl} alt="Logo" className="h-10 object-contain" />
+              ) : (
+                <div className="bg-brand-dark p-2.5 rounded-xl flex items-center justify-center">
+                  <Bus className="text-brand-yellow h-6 w-6" />
+                </div>
+              )}
               <div className="flex flex-col flex-1 pl-1">
                 <span className="font-bold text-[1.4rem] tracking-tight text-brand-dark leading-[1.1]">
-                  NZOKO
+                  {settings?.name?.toUpperCase() || 'NZOKO'}
                 </span>
                 <span className="text-[10px] tracking-[0.25em] text-brand-yellow font-bold uppercase leading-none">Transport</span>
               </div>
@@ -64,7 +70,7 @@ export default function Navbar() {
                   {link.name}
                 </Link>
               ))}
-              <Link to="/contact" className="bg-brand-yellow text-brand-dark px-6 py-2.5 rounded-lg hover:bg-yellow-500 transition-colors font-bold shadow-sm uppercase text-xs tracking-widest">
+              <Link to="/booking" className="bg-brand-yellow text-brand-dark px-6 py-2.5 rounded-lg hover:bg-yellow-500 transition-colors font-bold shadow-sm uppercase text-xs tracking-widest">
                 Acheter un Billet
               </Link>
             </div>
@@ -98,7 +104,7 @@ export default function Navbar() {
                 </Link>
               ))}
               <div className="pt-6">
-                <Link to="/contact" className="block w-full text-center bg-brand-yellow text-brand-dark px-6 py-4 rounded-xl hover:bg-yellow-500 font-bold uppercase tracking-widest text-sm shadow-md">
+                <Link to="/booking" className="block w-full text-center bg-brand-yellow text-brand-dark px-6 py-4 rounded-xl hover:bg-yellow-500 font-bold uppercase tracking-widest text-sm shadow-md">
                   Acheter un Billet
                 </Link>
               </div>

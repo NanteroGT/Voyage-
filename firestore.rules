@@ -87,7 +87,9 @@ service cloud.firestore {
             && data.whatsapp is string
             && data.heroTitle is string
             && data.heroSubtitle is string
-            && data.heroImageUrl is string;
+            && data.heroImageUrl is string
+            && (!('name' in data) || data.name is string)
+            && (!('logoUrl' in data) || data.logoUrl is string);
     }
 
     function isValidHomepageConfig(data) {
@@ -100,6 +102,27 @@ service cloud.firestore {
             && (!('phone' in data) || (data.phone is string && data.phone.size() <= 50))
             && (!('whatsapp' in data) || (data.whatsapp is string && data.whatsapp.size() <= 50))
             && (!('email' in data) || (data.email is string && data.email.size() <= 200));
+    }
+
+    function isValidMessage(data) {
+      return data.keys().hasAll(['name', 'email', 'subject', 'message', 'status'])
+        && data.name is string && data.name.size() <= 200
+        && data.email is string && data.email.size() <= 200
+        && (!('phone' in data) || (data.phone is string && data.phone.size() <= 50))
+        && data.subject is string && data.subject.size() <= 200
+        && data.message is string && data.message.size() <= 5000
+        && data.status in ['Nouveau', 'Lu', 'Traité'];
+    }
+
+    function isValidTicket(data) {
+      return data.keys().hasAll(['departure', 'arrival', 'date', 'passengerName', 'passengerPhone', 'status'])
+        && data.departure is string && data.departure.size() <= 100
+        && data.arrival is string && data.arrival.size() <= 100
+        && data.date is string && data.date.size() <= 50
+        && data.passengerName is string && data.passengerName.size() <= 200
+        && data.passengerPhone is string && data.passengerPhone.size() <= 50
+        && (!('passengerEmail' in data) || (data.passengerEmail is string && data.passengerEmail.size() <= 200))
+        && data.status in ['En attente', 'Confirmé', 'Annulé'];
     }
 
     // 3. Collection Rules
@@ -155,6 +178,20 @@ service cloud.firestore {
     match /admins/{userId} {
       allow read: if isAdmin() || (isVerified() && userId == request.auth.uid);
       allow write: if isAdmin() || (isVerified() && userId == request.auth.uid && request.resource.data.email == 'nantesokemba63@gmail.com');
+    }
+
+    match /tickets/{ticketId} {
+      allow list, get: if isAdmin();
+      allow create: if isValidId(ticketId) && isValidTicket(incoming()) && incoming().createdAt == request.time;
+      allow update: if isAdmin() && isValidId(ticketId) && isValidTicket(incoming()) && incoming().updatedAt == request.time;
+      allow delete: if isAdmin();
+    }
+
+    match /messages/{messageId} {
+      allow list, get: if isAdmin();
+      allow create: if isValidId(messageId) && isValidMessage(incoming()) && incoming().createdAt == request.time;
+      allow update: if isAdmin() && isValidId(messageId) && isValidMessage(incoming());
+      allow delete: if isAdmin();
     }
   }
 }

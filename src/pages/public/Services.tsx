@@ -137,7 +137,7 @@ export default function Services() {
                Réservez dès maintenant votre billet pour l'une de nos destinations ou contactez-nous pour l'envoi de vos colis.
              </p>
              <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-               <Link to="/contact" className="w-full sm:w-auto px-10 py-5 bg-brand-yellow text-brand-dark font-bold uppercase tracking-widest text-sm rounded-2xl hover:bg-white hover:-translate-y-1 hover:shadow-xl transition-all duration-300">
+               <Link to="/booking" className="w-full sm:w-auto px-10 py-5 bg-brand-yellow text-brand-dark font-bold uppercase tracking-widest text-sm rounded-2xl hover:bg-white hover:-translate-y-1 hover:shadow-xl transition-all duration-300">
                  Effectuer une réservation
                </Link>
                <Link to="/tracking" className="w-full sm:w-auto px-10 py-5 bg-white/10 backdrop-blur-md text-white border border-white/20 font-bold uppercase tracking-widest text-sm rounded-2xl hover:bg-white/20 transition-all duration-300">

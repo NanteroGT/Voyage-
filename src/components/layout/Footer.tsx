@@ -1,7 +1,10 @@
 import { Link } from 'react-router-dom';
 import { Bus, MapPin, Phone, Mail, Facebook, Instagram, Linkedin, MessageCircle } from 'lucide-react';
+import { useSettings } from '../../lib/useSettings';
 
 export default function Footer() {
+  const { settings } = useSettings();
+  
   return (
     <footer className="bg-brand-dark text-slate-300">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
@@ -10,12 +13,16 @@ export default function Footer() {
           {/* Brand & About */}
           <div className="space-y-6">
             <Link to="/" className="flex items-center space-x-3 mb-8">
-              <div className="bg-brand-yellow p-2.5 rounded-xl flex items-center justify-center">
-                <Bus className="text-brand-dark h-6 w-6" />
-              </div>
+              {settings?.logoUrl ? (
+                <img src={settings.logoUrl} alt="Logo" className="h-10 object-contain" />
+              ) : (
+                <div className="bg-brand-yellow p-2.5 rounded-xl flex items-center justify-center">
+                  <Bus className="text-brand-dark h-6 w-6" />
+                </div>
+              )}
               <div className="flex flex-col">
                 <span className="font-bold text-[1.4rem] tracking-tight text-white leading-[1.1]">
-                  NZOKO
+                  {settings?.name?.toUpperCase() || 'NZOKO'}
                 </span>
                 <span className="text-[10px] tracking-[0.25em] text-brand-yellow font-bold uppercase leading-none mt-0">Transport</span>
               </div>
@@ -63,7 +70,11 @@ export default function Footer() {
               </li>
               <li className="flex items-center group">
                 <Phone className="text-brand-yellow mr-4 shrink-0 group-hover:scale-110 transition-transform" size={20} />
-                <span>+242 06 167 1X XX</span>
+                <span>{settings?.phone || '+242 06 167 1X XX'}</span>
+              </li>
+              <li className="flex items-center group">
+                <MessageCircle className="text-brand-yellow mr-4 shrink-0 group-hover:scale-110 transition-transform" size={20} />
+                <span>{settings?.whatsapp || 'Non disponible'}</span>
               </li>
               <li className="flex items-center group">
                 <Mail className="text-brand-yellow mr-4 shrink-0 group-hover:scale-110 transition-transform" size={20} />
@@ -78,7 +89,7 @@ export default function Footer() {
       {/* Bottom Bar */}
       <div className="border-t border-white/10 py-6">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center text-sm text-slate-500 font-medium">
-          <p className="font-light">&copy; {new Date().getFullYear()} Nzoko Transport. Tous droits réservés.</p>
+          <p className="font-light">&copy; {new Date().getFullYear()} {settings?.name || 'Nzoko Transport'}. Tous droits réservés.</p>
           <div className="flex space-x-6 mt-4 md:mt-0 font-light">
             <Link to="/admin/login" className="hover:text-brand-yellow transition-colors tracking-widest uppercase text-xs">Espace Admin</Link>
           </div>

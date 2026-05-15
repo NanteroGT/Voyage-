@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 import { ArrowRight, Bus, Package, MapPin, CheckCircle2, Search, Ticket, ShieldCheck, Clock, Map } from 'lucide-react';
 import { Link, useNavigate } from 'react-router-dom';
+import { useSettings } from '../../lib/useSettings';
 
 export default function Home() {
   const [trackingNumber, setTrackingNumber] = useState('');
   const navigate = useNavigate();
+  const { settings } = useSettings();
 
   const handleTrackingSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -51,7 +53,7 @@ export default function Home() {
       <section className="relative bg-brand-dark text-white min-h-[90vh] flex items-center">
         <div className="absolute inset-0">
           <img 
-            src="https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?ixlib=rb-4.0.3&auto=format&fit=crop&w=2069&q=80" 
+            src={settings?.heroImageUrl || "https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?ixlib=rb-4.0.3&auto=format&fit=crop&w=2069&q=80"}
             alt="Bus sur l'autoroute" 
             className="w-full h-full object-cover opacity-20"
           />
@@ -66,18 +68,18 @@ export default function Home() {
             </div>
             
             <h1 className="text-4xl md:text-6xl lg:text-[4.5rem] font-bold text-white mb-8 leading-[1.1]">
-              Voyagez dans le <br/>
-              <span className="text-brand-yellow">calme absolu.</span>
+              {settings?.heroTitle ? settings.heroTitle.split('<br/>').map((line: string, i: number) => <React.Fragment key={i}>{line}<br/></React.Fragment>) : (
+                <>Voyagez dans le <br/><span className="text-brand-yellow">calme absolu.</span></>
+              )}
             </h1>
             
-            <p className="text-lg md:text-2xl text-slate-300 mb-12 leading-relaxed font-light max-w-2xl">
-              Nzoko Transport vous offre une expérience interurbaine où le confort, la sécurité et l'élégance priment. <br/><br/>
-              <span className="font-medium italic text-brand-yellow text-xl">« Voyagez na kimia, bozali na Nzoko. »</span>
+            <p className="text-lg md:text-2xl text-slate-300 mb-12 leading-relaxed font-light max-w-2xl whitespace-pre-wrap">
+              {settings?.heroSubtitle || "Nzoko Transport vous offre une expérience interurbaine où le confort, la sécurité et l'élégance priment. \n\n« Voyagez na kimia, bozali na Nzoko. »"}
             </p>
             
             {/* Action Buttons & Tracking */}
             <div className="flex flex-col sm:flex-row gap-4 items-start sm:items-center">
-              <Link to="/contact" className="w-full sm:w-auto bg-brand-yellow text-brand-dark px-8 py-5 rounded-2xl font-bold hover:bg-amber-400 hover:-translate-y-1 transition-all flex items-center justify-center uppercase tracking-widest text-sm shadow-[0_10px_30px_rgba(234,219,187,0.3)]">
+              <Link to="/booking" className="w-full sm:w-auto bg-brand-yellow text-brand-dark px-8 py-5 rounded-2xl font-bold hover:bg-amber-400 hover:-translate-y-1 transition-all flex items-center justify-center uppercase tracking-widest text-sm shadow-[0_10px_30px_rgba(234,219,187,0.3)]">
                 <Ticket className="mr-2" size={20} />
                 Acheter un billet
               </Link>
@@ -257,7 +259,7 @@ export default function Home() {
                  Réservez votre billet de bus dès aujourd'hui ou envoyez vos colis dans l'une de nos agences réparties à travers le pays.
                </p>
                <div className="flex flex-col sm:flex-row justify-center gap-6">
-                 <Link to="/contact" className="inline-flex items-center justify-center bg-brand-yellow text-brand-dark px-10 py-5 rounded-2xl font-bold text-sm tracking-widest hover:bg-white hover:-translate-y-1 hover:shadow-2xl transition-all uppercase">
+                 <Link to="/booking" className="inline-flex items-center justify-center bg-brand-yellow text-brand-dark px-10 py-5 rounded-2xl font-bold text-sm tracking-widest hover:bg-white hover:-translate-y-1 hover:shadow-2xl transition-all uppercase">
                    <Ticket className="mr-3" size={24} /> Acheter un billet
                  </Link>
                  <Link to="/tracking" className="inline-flex items-center justify-center bg-white/10 backdrop-blur-md border border-white/20 text-white px-10 py-5 rounded-2xl font-bold text-sm tracking-widest hover:bg-white/20 hover:-translate-y-1 transition-all uppercase">

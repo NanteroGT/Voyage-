@@ -7,7 +7,10 @@ import {
   LogOut, 
   Menu,
   X,
-  Truck
+  Truck,
+  Ticket,
+  MessageSquare,
+  Settings
 } from 'lucide-react';
 import { auth, db } from '../../lib/firebase';
 import { onAuthStateChanged, signOut } from 'firebase/auth';
@@ -49,7 +52,10 @@ export default function AdminLayout() {
 
   const navItems = [
     { name: 'Tableau de Bord', path: '/admin/dashboard', icon: LayoutDashboard },
-    { name: 'Gestion des Colis', path: '/admin/packages', icon: Package },
+    { name: 'Réservations', path: '/admin/tickets', icon: Ticket },
+    { name: 'Colis & Fret', path: '/admin/packages', icon: Package },
+    { name: 'Messages', path: '/admin/messages', icon: MessageSquare },
+    { name: 'Paramètres', path: '/admin/settings', icon: Settings },
     { name: 'Administrateurs', path: '/admin/users', icon: Users },
   ];
 

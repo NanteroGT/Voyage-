@@ -121,6 +121,7 @@
       "description": "Configuration globale du site (logo, téléphone, etc).",
       "type": "object",
       "properties": {
+        "name": { "type": "string" },
         "phone": { "type": "string" },
         "whatsapp": { "type": "string" },
         "logoUrl": { "type": "string" },
@@ -139,6 +140,38 @@
         "imageUrl": { "type": "string" },
         "updatedAt": { "type": "string", "format": "date-time" }
       }
+    },
+    "Ticket": {
+      "title": "Ticket",
+      "description": "Billet réservé par un client.",
+      "type": "object",
+      "properties": {
+        "departure": { "type": "string" },
+        "arrival": { "type": "string" },
+        "date": { "type": "string", "format": "date" },
+        "passengerName": { "type": "string" },
+        "passengerPhone": { "type": "string" },
+        "passengerEmail": { "type": "string" },
+        "status": { "type": "string", "enum": ["En attente", "Confirmé", "Annulé"] },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["departure", "arrival", "date", "passengerName", "passengerPhone", "status"]
+    },
+    "Message": {
+      "title": "Message",
+      "description": "Message de contact.",
+      "type": "object",
+      "properties": {
+        "name": { "type": "string" },
+        "email": { "type": "string" },
+        "phone": { "type": "string" },
+        "subject": { "type": "string" },
+        "message": { "type": "string" },
+        "status": { "type": "string", "enum": ["Nouveau", "Lu", "Traité"] },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["name", "email", "subject", "message", "status"]
     }
   },
   "firestore": {
@@ -194,6 +227,14 @@
         }
       },
       "description": "Liste des administrateurs autorisés."
+    },
+    "tickets/{ticketId}": {
+      "schema": "Ticket",
+      "description": "Réservations de billets."
+    },
+    "messages/{messageId}": {
+      "schema": "Message",
+      "description": "Messages utilisateurs."
     }
   }
 }

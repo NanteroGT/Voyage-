@@ -1,7 +1,11 @@
 import React, { useState } from 'react';
 import { Mail, Phone, MapPin, Clock, Bus, Send } from 'lucide-react';
+import { collection, addDoc, serverTimestamp } from 'firebase/firestore';
+import { db } from '../../lib/firebase';
+import { useSettings } from '../../lib/useSettings';
 
 export default function Contact() {
+  const { settings } = useSettings();
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -10,13 +14,26 @@ export default function Contact() {
     message: ''
   });
   const [status, setStatus] = useState<null | 'success'>(null);
+  const [loading, setLoading] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setTimeout(() => {
+    setLoading(true);
+    
+    try {
+      await addDoc(collection(db, 'messages'), {
+        ...formData,
+        status: 'Nouveau',
+        createdAt: serverTimestamp()
+      });
       setStatus('success');
       setFormData({ name: '', email: '', phone: '', subject: '', message: '' });
-    }, 1000);
+    } catch (e) {
+      console.error(e);
+      alert('Erreur lors de l\'envoi du message.');
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -75,7 +92,7 @@ export default function Contact() {
                </div>
                <div>
                   <h4 className="font-bold text-slate-400 text-xs uppercase tracking-widest mb-1">Téléphone</h4>
-                  <p className="text-brand-dark font-semibold text-lg">+242 06 167 1X XX</p>
+                  <p className="text-brand-dark font-semibold text-lg">{settings?.phone || '+242 06 167 1X XX'}</p>
                </div>
             </div>
 
@@ -130,7 +147,7 @@ export default function Contact() {
                       required
                       className="w-full px-5 py-4 rounded-2xl border border-slate-200 focus:border-brand-yellow focus:ring-4 focus:ring-brand-yellow/10 outline-none transition-all font-light bg-slate-50/50 hover:bg-slate-50 placeholder:text-slate-300 text-brand-dark"
                       value={formData.name}
-                      placeholder="Jean Dupont"
+                      placeholder="Votre nom complet"
                       onChange={(e) => setFormData({...formData, name: e.target.value})}
                     />
                   </div>
@@ -141,7 +158,7 @@ export default function Contact() {
                       required
                       className="w-full px-5 py-4 rounded-2xl border border-slate-200 focus:border-brand-yellow focus:ring-4 focus:ring-brand-yellow/10 outline-none transition-all font-light bg-slate-50/50 hover:bg-slate-50 placeholder:text-slate-300 text-brand-dark"
                       value={formData.email}
-                      placeholder="jean@exemple.com"
+                      placeholder="votre.email@exemple.com"
                       onChange={(e) => setFormData({...formData, email: e.target.value})}
                     />
                   </div>
@@ -154,7 +171,7 @@ export default function Contact() {
                       type="tel" 
                       className="w-full px-5 py-4 rounded-2xl border border-slate-200 focus:border-brand-yellow focus:ring-4 focus:ring-brand-yellow/10 outline-none transition-all font-light bg-slate-50/50 hover:bg-slate-50 placeholder:text-slate-300 text-brand-dark"
                       value={formData.phone}
-                      placeholder="+242 xx xxx xxxx"
+                      placeholder="ex: +242 06 000 00 00"
                       onChange={(e) => setFormData({...formData, phone: e.target.value})}
                     />
                   </div>
@@ -190,9 +207,10 @@ export default function Contact() {
                 <div className="pt-6">
                   <button 
                     type="submit"
-                    className="w-full flex justify-center items-center px-10 py-5 bg-brand-dark text-white font-bold uppercase tracking-widest text-sm rounded-2xl hover:bg-brand-yellow hover:text-brand-dark hover:-translate-y-1 hover:shadow-2xl transition-all duration-500 group"
+                    disabled={loading}
+                    className="w-full flex justify-center items-center px-10 py-5 bg-brand-dark text-white font-bold uppercase tracking-widest text-sm rounded-2xl hover:bg-brand-yellow hover:text-brand-dark hover:-translate-y-1 hover:shadow-2xl transition-all duration-500 group disabled:opacity-50 disabled:cursor-not-allowed"
                   >
-                    <span>Envoyer la demande</span>
+                    <span>{loading ? 'Envoi...' : 'Envoyer la demande'}</span>
                     <Send className="ml-3 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" size={18} />
                   </button>
                 </div>
