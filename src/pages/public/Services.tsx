@@ -65,7 +65,7 @@ export default function Services() {
             return (
               <div 
                 key={index} 
-                className={`group rounded-[2.5rem] p-10 md:p-12 relative overflow-hidden transition-all duration-700 ${service.colSpan} ${
+                className={`group rounded-[2.5rem] p-8 md:p-12 relative overflow-hidden transition-all duration-700 ${service.colSpan} ${
                   isDark ? 'bg-brand-dark text-white border border-white/10 shadow-2xl shadow-brand-dark/20' : 
                   isYellow ? 'bg-brand-yellow text-brand-dark border border-brand-yellow shadow-xl shadow-brand-yellow/20' : 
                   'bg-white text-brand-dark border border-slate-200/60 shadow-xl shadow-slate-200/10 hover:-translate-y-2 hover:shadow-[0_20px_50px_rgba(10,28,39,0.08)]'
@@ -105,7 +105,7 @@ export default function Services() {
 
         {/* Informational Sub-blocks */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-8">
-           <div className="bg-white rounded-[2rem] p-10 border border-slate-200/60 flex items-center shadow-sm">
+           <div className="bg-white rounded-[2rem] p-6 md:p-10 border border-slate-200/60 flex items-center shadow-sm">
               <div className="bg-brand-cream w-14 h-14 rounded-2xl flex items-center justify-center shrink-0 mr-6">
                  <Clock className="text-brand-yellow" size={24} />
               </div>
@@ -115,7 +115,7 @@ export default function Services() {
               </div>
            </div>
            
-           <div className="bg-white rounded-[2rem] p-10 border border-slate-200/60 flex items-center shadow-sm">
+           <div className="bg-white rounded-[2rem] p-6 md:p-10 border border-slate-200/60 flex items-center shadow-sm">
               <div className="bg-brand-cream w-14 h-14 rounded-2xl flex items-center justify-center shrink-0 mr-6">
                  <Map className="text-brand-yellow" size={24} />
               </div>
@@ -127,7 +127,7 @@ export default function Services() {
         </div>
 
         {/* CTA Section */}
-        <div className="mt-24 bg-brand-dark rounded-[3rem] p-12 md:p-16 text-center shadow-2xl relative overflow-hidden group">
+        <div className="mt-16 md:mt-24 bg-brand-dark rounded-[3rem] p-8 md:p-16 text-center shadow-2xl relative overflow-hidden group">
            <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-brand-yellow/20 to-transparent opacity-50 group-hover:scale-150 transition-transform duration-1000"></div>
            <div className="relative z-10 max-w-3xl mx-auto">
              <h3 className="text-3xl md:text-5xl font-bold text-white mb-6 tracking-tight">

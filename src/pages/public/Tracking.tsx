@@ -100,7 +100,7 @@ export default function Tracking() {
   return (
     <div className="min-h-screen bg-brand-cream pb-24">
       {/* Search Header */}
-      <div className="relative bg-brand-dark py-32 mb-16 overflow-hidden">
+      <div className="relative bg-brand-dark py-16 md:py-32 mb-8 md:mb-16 overflow-hidden">
         <div className="absolute inset-0">
            <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-brand-yellow/10 to-transparent"></div>
         </div>
@@ -212,7 +212,7 @@ export default function Tracking() {
 
             {/* Timeline */}
             <div className="lg:col-span-2">
-              <div className="bg-white rounded-[2rem] shadow-xl border border-slate-100 p-10 h-full">
+              <div className="bg-white rounded-[2rem] shadow-xl border border-slate-100 p-6 md:p-10 h-full">
                 <h3 className="text-2xl font-bold text-brand-dark mb-10 border-b border-slate-100 pb-6 flex items-center tracking-tight">
                   <Clock className="mr-4 text-brand-yellow" size={28} />
                   Historique d'expédition

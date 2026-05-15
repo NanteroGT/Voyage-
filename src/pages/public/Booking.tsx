@@ -40,7 +40,7 @@ export default function Booking() {
   if (status === 'success') {
     return (
       <div className="bg-brand-cream min-h-screen pt-32 pb-24 flex items-center justify-center">
-        <div className="bg-white p-12 rounded-[2rem] shadow-xl max-w-lg text-center border border-slate-100">
+        <div className="bg-white p-6 md:p-12 rounded-[2rem] shadow-xl max-w-lg text-center border border-slate-100">
           <div className="w-20 h-20 bg-green-100 text-green-500 rounded-full flex items-center justify-center mx-auto mb-6">
             <CheckCircle2 size={40} />
           </div>
@@ -66,7 +66,7 @@ export default function Booking() {
           </p>
         </div>
 
-        <div className="bg-white rounded-[2rem] p-8 md:p-12 shadow-2xl border border-slate-100">
+        <div className="bg-white rounded-[2rem] p-6 md:p-12 shadow-2xl border border-slate-100">
           <form onSubmit={handleSubmit} className="space-y-8">
             <h3 className="text-xl font-bold text-brand-dark border-b border-slate-100 pb-4">1. Votre Trajet</h3>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">

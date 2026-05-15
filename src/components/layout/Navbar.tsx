@@ -24,9 +24,9 @@ export default function Navbar() {
   ];
 
   return (
-    <>
+    <header className="sticky top-0 w-full z-50 flex flex-col shadow-sm">
       {/* Top Bar for Contact Info */}
-      <div className="hidden lg:flex bg-brand-dark text-slate-300 py-2 px-8 text-sm justify-between items-center fixed w-full top-0 z-50">
+      <div className="hidden lg:flex bg-brand-dark text-slate-300 py-2 px-8 text-sm justify-between items-center w-full">
         <div className="flex items-center space-x-6">
           <span className="flex items-center"><Phone size={14} className="mr-2 text-brand-yellow" /> {settings?.phone || '+242 06 167 1X XX'}</span>
           <span className="flex items-center"><Mail size={14} className="mr-2 text-brand-yellow" /> contact@nzokotransport.com</span>
@@ -37,7 +37,7 @@ export default function Navbar() {
       </div>
 
       {/* Main Navbar */}
-      <nav className={`fixed w-full z-40 transition-all duration-300 ${isScrolled ? 'top-0 bg-white shadow-md py-3' : 'top-0 lg:top-9 bg-white py-4'}`}>
+      <nav className={`w-full bg-white transition-all duration-300 ${isScrolled ? 'py-3 shadow-md' : 'py-4'}`}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center">
             {/* Logo */}
@@ -112,6 +112,6 @@ export default function Navbar() {
           </div>
         )}
       </nav>
-    </>
+    </header>
   );
 }

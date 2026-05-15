@@ -60,14 +60,14 @@ export default function Home() {
           <div className="absolute inset-0 bg-gradient-to-r from-brand-dark via-brand-dark/90 to-brand-dark/40"></div>
         </div>
         
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-32 lg:py-0 w-full">
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 md:py-32 lg:py-0 w-full">
           <div className="max-w-3xl">
             <div className="inline-flex items-center space-x-2 bg-white/10 backdrop-blur-md border border-white/20 rounded-full px-5 py-2 mb-8">
               <span className="w-2 h-2 rounded-full bg-brand-yellow animate-pulse"></span>
               <span className="text-brand-cream font-medium text-sm tracking-widest uppercase">Nouvelle ère du transport au Congo</span>
             </div>
             
-            <h1 className="text-4xl md:text-6xl lg:text-[4.5rem] font-bold text-white mb-8 leading-[1.1]">
+            <h1 className="text-4xl md:text-6xl lg:text-[4.5rem] font-bold text-white mb-6 md:mb-8 leading-[1.1]">
               {settings?.heroTitle ? settings.heroTitle.split('<br/>').map((line: string, i: number) => <React.Fragment key={i}>{line}<br/></React.Fragment>) : (
                 <>Voyagez dans le <br/><span className="text-brand-yellow">calme absolu.</span></>
               )}
@@ -79,7 +79,7 @@ export default function Home() {
             
             {/* Action Buttons & Tracking */}
             <div className="flex flex-col sm:flex-row gap-4 items-start sm:items-center">
-              <Link to="/booking" className="w-full sm:w-auto bg-brand-yellow text-brand-dark px-8 py-5 rounded-2xl font-bold hover:bg-amber-400 hover:-translate-y-1 transition-all flex items-center justify-center uppercase tracking-widest text-sm shadow-[0_10px_30px_rgba(234,219,187,0.3)]">
+              <Link to="/booking" className="w-full sm:w-auto bg-brand-yellow text-brand-dark px-8 py-4 md:py-5 rounded-2xl font-bold hover:bg-amber-400 hover:-translate-y-1 transition-all flex items-center justify-center uppercase tracking-widest text-sm shadow-[0_10px_30px_rgba(234,219,187,0.3)]">
                 <Ticket className="mr-2" size={20} />
                 Acheter un billet
               </Link>
@@ -110,47 +110,47 @@ export default function Home() {
       {/* Intro Stats / Credibility */}
       <section className="border-b border-slate-200 bg-white relative z-10">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 py-12 divide-x divide-slate-100">
-            <div className="text-center px-4">
-              <h3 className="text-4xl font-bold text-brand-dark mb-2">4+</h3>
-              <p className="text-slate-500 text-sm uppercase tracking-wider font-medium">Villes desservies</p>
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8 py-8 md:py-12 divide-y md:divide-y-0 divide-slate-100 lg:divide-x">
+            <div className="text-center px-2 md:px-4 py-4 md:py-0">
+              <h3 className="text-3xl md:text-4xl font-bold text-brand-dark mb-1 md:mb-2">4+</h3>
+              <p className="text-slate-500 text-xs md:text-sm uppercase tracking-wider font-medium">Villes desservies</p>
             </div>
-            <div className="text-center px-4">
-              <h3 className="text-4xl font-bold text-brand-dark mb-2">10</h3>
-              <p className="text-slate-500 text-sm uppercase tracking-wider font-medium">Agences au niveau national</p>
+            <div className="text-center px-2 md:px-4 py-4 md:py-0 border-l lg:border-l border-slate-100 md:border-none">
+              <h3 className="text-3xl md:text-4xl font-bold text-brand-dark mb-1 md:mb-2">10</h3>
+              <p className="text-slate-500 text-xs md:text-sm uppercase tracking-wider font-medium">Agences au niveau national</p>
             </div>
-            <div className="text-center px-4">
-              <h3 className="text-4xl font-bold text-brand-dark mb-2">100%</h3>
-              <p className="text-slate-500 text-sm uppercase tracking-wider font-medium">Flotte moderne</p>
+            <div className="text-center px-2 md:px-4 py-4 md:py-0">
+              <h3 className="text-3xl md:text-4xl font-bold text-brand-dark mb-1 md:mb-2">100%</h3>
+              <p className="text-slate-500 text-xs md:text-sm uppercase tracking-wider font-medium">Flotte moderne</p>
             </div>
-            <div className="text-center px-4">
-              <h3 className="text-4xl font-bold text-brand-dark mb-2">24/7</h3>
-              <p className="text-slate-500 text-sm uppercase tracking-wider font-medium">Support Client</p>
+            <div className="text-center px-2 md:px-4 py-4 md:py-0 border-l lg:border-l border-slate-100 md:border-none">
+              <h3 className="text-3xl md:text-4xl font-bold text-brand-dark mb-1 md:mb-2">24/7</h3>
+              <p className="text-slate-500 text-xs md:text-sm uppercase tracking-wider font-medium">Support Client</p>
             </div>
           </div>
         </div>
       </section>
 
       {/* Services Section */}
-      <section className="py-24 bg-brand-cream">
+      <section className="py-16 md:py-24 bg-brand-cream">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center max-w-3xl mx-auto mb-20">
-            <span className="text-brand-yellow font-semibold tracking-widest uppercase text-sm mb-3 block">Nos Prestations</span>
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-brand-dark mb-6">L'excellence en mouvement</h2>
-            <p className="text-slate-600 text-lg">Nous avons repensé chaque détail pour vous offrir un service de transport à la hauteur de vos exigences, alliant confort, fiabilité et professionnalisme.</p>
+          <div className="text-center max-w-3xl mx-auto mb-12 md:mb-20">
+            <span className="text-brand-yellow font-semibold tracking-widest uppercase text-xs md:text-sm mb-3 block">Nos Prestations</span>
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-brand-dark mb-4 md:mb-6">L'excellence en mouvement</h2>
+            <p className="text-slate-600 text-base md:text-lg">Nous avons repensé chaque détail pour vous offrir un service de transport à la hauteur de vos exigences, alliant confort, fiabilité et professionnalisme.</p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
             {services.map((service, index) => {
               const Icon = service.icon;
               return (
-                <div key={index} className="group bg-white rounded-2xl p-10 hover:shadow-[0_20px_50px_rgba(10,28,39,0.08)] transition-all duration-500 border border-slate-200/60 flex flex-col items-center text-center">
-                  <div className="bg-brand-cream text-brand-yellow w-20 h-20 rounded-full flex items-center justify-center mb-8 group-hover:bg-brand-yellow group-hover:text-white transition-colors duration-500">
-                    <Icon size={36} strokeWidth={1.5} />
+                <div key={index} className="group bg-white rounded-2xl p-6 md:p-8 lg:p-10 hover:shadow-[0_20px_50px_rgba(10,28,39,0.08)] transition-all duration-500 border border-slate-200/60 flex flex-col items-center text-center">
+                  <div className="bg-brand-cream text-brand-yellow w-16 h-16 md:w-20 md:h-20 rounded-full flex items-center justify-center mb-6 md:mb-8 group-hover:bg-brand-yellow group-hover:text-white transition-colors duration-500">
+                    <Icon size={32} strokeWidth={1.5} className="md:w-9 md:h-9" />
                   </div>
-                  <h3 className="text-2xl font-bold text-brand-dark mb-4">{service.title}</h3>
-                  <p className="text-slate-600 mb-8 leading-relaxed font-light">{service.desc}</p>
-                  <Link to="/services" className="mt-auto inline-flex items-center text-brand-dark font-medium group-hover:text-brand-yellow transition-colors uppercase tracking-wider text-sm">
+                  <h3 className="text-xl md:text-2xl font-bold text-brand-dark mb-3 md:mb-4">{service.title}</h3>
+                  <p className="text-slate-600 mb-6 md:mb-8 leading-relaxed font-light text-sm md:text-base">{service.desc}</p>
+                  <Link to="/services" className="mt-auto inline-flex items-center text-brand-dark font-medium group-hover:text-brand-yellow transition-colors uppercase tracking-wider text-xs md:text-sm">
                     En savoir plus <ArrowRight size={18} className="ml-2 group-hover:translate-x-1 transition-transform" />
                   </Link>
                 </div>
@@ -161,11 +161,11 @@ export default function Home() {
       </section>
 
       {/* Why Choose Us Section */}
-      <section className="py-32 bg-white relative overflow-hidden">
+      <section className="py-16 md:py-32 bg-white relative overflow-hidden">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 md:gap-20 items-center">
             <div className="order-2 lg:order-1 relative">
-              <div className="aspect-[4/5] rounded-[2rem] overflow-hidden shadow-2xl relative z-10">
+              <div className="aspect-[4/5] rounded-[1.5rem] md:rounded-[2rem] overflow-hidden shadow-2xl relative z-10">
                 <img 
                   src="https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" 
                   alt="Bus moderne et confortable" 
@@ -187,13 +187,13 @@ export default function Home() {
             </div>
 
             <div className="order-1 lg:order-2">
-              <span className="text-brand-yellow font-semibold tracking-widest uppercase text-sm mb-3 block">Pourquoi Nzoko</span>
-              <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-brand-dark mb-8">Plus qu'un voyage, un art de vivre.</h2>
-              <p className="text-slate-600 text-lg leading-relaxed mb-12 font-light">
+              <span className="text-brand-yellow font-semibold tracking-widest uppercase text-xs md:text-sm mb-3 block">Pourquoi Nzoko</span>
+              <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-brand-dark mb-6 md:mb-8">Plus qu'un voyage, un art de vivre.</h2>
+              <p className="text-slate-600 text-base md:text-lg leading-relaxed mb-10 md:mb-12 font-light">
                 Inspirée par la force et l'élégance de l'éléphant, Nzoko Transport a été créée pour élever les standards de voyage interurbain au Congo. Laissez-vous transporter dans un cadre où chaque passager est de la plus haute importance.
               </p>
               
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 md:gap-8">
                 {features.map((feature, i) => (
                   <div key={i} className="flex">
                     <div className="mr-5 shrink-0">
@@ -214,24 +214,24 @@ export default function Home() {
       </section>
 
       {/* Agencies Map Section */}
-      <section className="py-24 bg-brand-dark text-white">
+      <section className="py-16 md:py-24 bg-brand-dark text-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-col lg:flex-row gap-16 justify-between">
+          <div className="flex flex-col lg:flex-row gap-12 md:gap-16 justify-between">
             <div className="lg:w-1/3">
-              <span className="text-brand-yellow font-semibold tracking-widest uppercase text-sm mb-3 block">Couverture Nationale</span>
-              <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-6">Toujours plus proche de vous</h2>
-              <p className="text-slate-400 text-lg font-light mb-10 leading-relaxed">
+              <span className="text-brand-yellow font-semibold tracking-widest uppercase text-xs md:text-sm mb-3 block">Couverture Nationale</span>
+              <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-4 md:mb-6">Toujours plus proche de vous</h2>
+              <p className="text-slate-400 text-base md:text-lg font-light mb-8 md:mb-10 leading-relaxed">
                 Notre réseau d'agences est stratégiquement positionné pour faciliter l'accès à nos services de billetterie et d'envoi de colis.
               </p>
-              <Link to="/contact" className="inline-flex items-center text-brand-yellow font-medium hover:text-white transition-colors uppercase tracking-wider text-sm">
+              <Link to="/contact" className="inline-flex items-center text-brand-yellow font-medium hover:text-white transition-colors uppercase tracking-wider text-xs md:text-sm">
                 Voir toutes les adresses <ArrowRight size={18} className="ml-2" />
               </Link>
             </div>
             
-            <div className="lg:w-2/3 grid grid-cols-1 sm:grid-cols-2 gap-8">
+            <div className="lg:w-2/3 grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-8">
               {agencies.map((city, i) => (
-                <div key={i} className="bg-white/5 border border-white/10 rounded-2xl p-8 hover:bg-white/10 transition-colors">
-                  <h3 className="flex items-center text-2xl font-bold text-white mb-6">
+                <div key={i} className="bg-white/5 border border-white/10 rounded-2xl p-6 md:p-8 hover:bg-white/10 transition-colors">
+                  <h3 className="flex items-center text-xl md:text-2xl font-bold text-white mb-4 md:mb-6">
                     <MapPin className="mr-3 text-brand-yellow" size={24} /> {city.name}
                   </h3>
                   <ul className="space-y-4">
@@ -249,13 +249,13 @@ export default function Home() {
       </section>
 
       {/* CTA Section */}
-      <section className="py-24 bg-brand-cream relative overflow-hidden">
+      <section className="py-16 md:py-24 bg-brand-cream relative overflow-hidden">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-           <div className="bg-brand-dark rounded-[3rem] p-12 md:p-20 text-center shadow-2xl relative overflow-hidden group">
+           <div className="bg-brand-dark rounded-[2rem] md:rounded-[3rem] p-8 md:p-12 lg:p-20 text-center shadow-2xl relative overflow-hidden group">
              <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-brand-yellow/20 to-transparent opacity-40 group-hover:scale-150 transition-transform duration-1000"></div>
              <div className="relative z-10 max-w-4xl mx-auto">
-               <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-8 tracking-tight">Prêt à voyager <span className="text-brand-yellow italic">autrement</span> ?</h2>
-               <p className="text-xl md:text-2xl mb-12 font-light text-slate-300 max-w-2xl mx-auto">
+               <h2 className="text-3xl md:text-5xl lg:text-6xl font-bold text-white mb-6 md:mb-8 tracking-tight">Prêt à voyager <span className="text-brand-yellow italic">autrement</span> ?</h2>
+               <p className="text-lg md:text-2xl mb-10 md:mb-12 font-light text-slate-300 max-w-2xl mx-auto">
                  Réservez votre billet de bus dès aujourd'hui ou envoyez vos colis dans l'une de nos agences réparties à travers le pays.
                </p>
                <div className="flex flex-col sm:flex-row justify-center gap-6">

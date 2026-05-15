@@ -69,7 +69,7 @@ export default function Contact() {
           <div className="lg:col-span-5 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 gap-6">
             
             {/* Main Info Card */}
-            <div className="bg-brand-dark rounded-[2rem] p-10 relative overflow-hidden text-white sm:col-span-2 lg:col-span-1 shadow-2xl shadow-brand-dark/20 border border-white/10">
+            <div className="bg-brand-dark rounded-[2rem] p-6 md:p-10 relative overflow-hidden text-white sm:col-span-2 lg:col-span-1 shadow-2xl shadow-brand-dark/20 border border-white/10">
               <div className="absolute top-0 right-0 -mr-10 -mt-10 opacity-10 pointer-events-none">
                  <Bus size={200} />
               </div>
@@ -122,7 +122,7 @@ export default function Contact() {
 
           {/* Contact Form */}
           <div className="lg:col-span-7">
-            <div className="bg-white rounded-[2.5rem] shadow-2xl p-10 sm:p-14 border border-slate-100 h-full">
+            <div className="bg-white rounded-[2.5rem] shadow-2xl p-6 sm:p-14 border border-slate-100 h-full">
               <h3 className="text-3xl font-bold text-brand-dark mb-2 tracking-tight">Envoyez-nous un message</h3>
               <p className="text-slate-500 font-light mb-10">Remplissez le formulaire ci-dessous, notre équipe vous répondra le plus rapidement possible.</p>
               

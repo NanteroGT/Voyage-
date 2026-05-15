@@ -36,7 +36,7 @@ export default function About() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -mt-20 relative z-20 pb-24">
         
         {/* Intro Block & Image */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16 items-center mb-32">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 md:gap-16 items-center mb-16 md:mb-32">
           <div className="lg:col-span-5 order-2 lg:order-1">
             <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-brand-dark mb-8 tracking-tight leading-tight">
               L'éléphant, <br/>symbole de notre <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-yellow to-amber-500">force</span>.
@@ -80,7 +80,7 @@ export default function About() {
             {stats.map((stat, idx) => {
               const Icon = stat.icon;
               return (
-                <div key={idx} className="bg-white rounded-[2rem] p-8 border border-slate-200/60 shadow-xl shadow-slate-200/20 hover:-translate-y-2 transition-all duration-500 overflow-hidden relative group">
+                <div key={idx} className="bg-white rounded-[2rem] p-6 md:p-8 border border-slate-200/60 shadow-xl shadow-slate-200/20 hover:-translate-y-2 transition-all duration-500 overflow-hidden relative group">
                   <div className="absolute -right-10 -top-10 text-brand-yellow/5 group-hover:scale-150 transition-transform duration-700 pointer-events-none">
                      <Icon size={160} />
                   </div>
@@ -99,7 +99,7 @@ export default function About() {
         </div>
 
         {/* Vision Section */}
-        <div className="bg-brand-dark rounded-[3rem] p-10 md:p-16 relative overflow-hidden text-center max-w-5xl mx-auto shadow-2xl">
+        <div className="bg-brand-dark rounded-[3rem] p-8 md:p-16 relative overflow-hidden text-center max-w-5xl mx-auto shadow-2xl">
            <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-brand-yellow/10 to-transparent"></div>
            <div className="relative z-10 max-w-3xl mx-auto">
              <span className="text-brand-yellow font-medium text-xs tracking-widest uppercase mb-4 block">Notre Promesse</span>
