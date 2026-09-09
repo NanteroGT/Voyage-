@@ -91,8 +91,10 @@ export default function Contact() {
                   <Phone size={24} strokeWidth={1.5} />
                </div>
                <div>
-                  <h4 className="font-bold text-slate-400 text-xs uppercase tracking-widest mb-1">Téléphone</h4>
-                  <p className="text-brand-dark font-semibold text-lg">{settings?.phone || '+242 06 167 1X XX'}</p>
+                  <h4 className="font-bold text-slate-400 text-xs uppercase tracking-widest mb-1">Numéro Unique</h4>
+                  <a href="tel:061671717" className="text-brand-dark font-bold text-lg hover:text-brand-yellow transition-colors">
+                    {settings?.phone || '06 167 17 17'}
+                  </a>
                </div>
             </div>
 

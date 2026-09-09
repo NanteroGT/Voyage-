@@ -1,97 +1,187 @@
 import { Link } from 'react-router-dom';
-import { Bus, MapPin, Phone, Mail, Facebook, Instagram, Linkedin, MessageCircle } from 'lucide-react';
+import { MapPin, Phone, Mail, Facebook, Instagram, Linkedin, MessageCircle } from 'lucide-react';
 import { useSettings } from '../../lib/useSettings';
+import NzokoElephantLogo from '../common/NzokoElephantLogo';
 
 export default function Footer() {
   const { settings } = useSettings();
-  
+
   return (
     <footer className="bg-brand-dark text-slate-300">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
-          
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-20">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-12">
           {/* Brand & About */}
           <div className="space-y-6">
-            <Link to="/" className="flex items-center space-x-3 mb-8">
-              {settings?.logoUrl ? (
-                <img src={settings.logoUrl} alt="Logo" className="h-10 object-contain" />
-              ) : (
-                <div className="bg-brand-yellow p-2.5 rounded-xl flex items-center justify-center">
-                  <Bus className="text-brand-dark h-6 w-6" />
-                </div>
-              )}
-              <div className="flex flex-col">
-                <span className="font-bold text-[1.4rem] tracking-tight text-white leading-[1.1]">
-                  {settings?.name?.toUpperCase() || 'NZOKO'}
-                </span>
-                <span className="text-[10px] tracking-[0.25em] text-brand-yellow font-bold uppercase leading-none mt-0">Transport</span>
-              </div>
+            <Link to="/" className="inline-flex items-center space-x-3 mb-4">
+              <NzokoElephantLogo size={42} withText textColor="white" />
             </Link>
-            <p className="text-slate-400 text-sm leading-relaxed font-light mb-8 lg:pr-8">
-              Inspirée par la force de l'éléphant, Nzoko Transport offre une expérience interurbaine où confort, sécurité et élégance priment. <br/><br/>Voyagez na kimia.
+            <p className="text-slate-400 text-sm leading-relaxed font-light mb-6 lg:pr-6">
+              Inspirée par la force et la noblesse de l'éléphant, Nzoko Transport redéfinit le voyage interurbain au Congo. Confort absolu, ponctualité et sécurité sans compromis.
+              <br />
+              <br />
+              <span className="text-brand-yellow italic">« Voyagez na kimia, bozali na Nzoko. »</span>
             </p>
-            <div className="flex space-x-4">
-              <a href="https://facebook.com" target="_blank" rel="noreferrer" className="bg-white/5 border border-white/10 p-2.5 rounded-full text-white hover:bg-brand-yellow hover:text-brand-dark transition-all duration-300"><Facebook size={20} /></a>
-              <a href="https://instagram.com/nzoko.transport" target="_blank" rel="noreferrer" className="bg-white/5 border border-white/10 p-2.5 rounded-full text-white hover:bg-brand-yellow hover:text-brand-dark transition-all duration-300"><Instagram size={20} /></a>
-              <a href="https://linkedin.com" target="_blank" rel="noreferrer" className="bg-white/5 border border-white/10 p-2.5 rounded-full text-white hover:bg-brand-yellow hover:text-brand-dark transition-all duration-300"><Linkedin size={20} /></a>
+            <div className="flex space-x-3">
+              <a
+                href="https://facebook.com"
+                target="_blank"
+                rel="noreferrer"
+                className="bg-white/5 border border-white/10 p-2.5 rounded-full text-white hover:bg-brand-yellow hover:text-brand-dark transition-all duration-300"
+                aria-label="Facebook"
+              >
+                <Facebook size={18} />
+              </a>
+              <a
+                href="https://instagram.com/nzoko.transport"
+                target="_blank"
+                rel="noreferrer"
+                className="bg-white/5 border border-white/10 p-2.5 rounded-full text-white hover:bg-brand-yellow hover:text-brand-dark transition-all duration-300"
+                aria-label="Instagram"
+              >
+                <Instagram size={18} />
+              </a>
+              <a
+                href="https://linkedin.com"
+                target="_blank"
+                rel="noreferrer"
+                className="bg-white/5 border border-white/10 p-2.5 rounded-full text-white hover:bg-brand-yellow hover:text-brand-dark transition-all duration-300"
+                aria-label="LinkedIn"
+              >
+                <Linkedin size={18} />
+              </a>
             </div>
           </div>
 
           {/* Quick Links */}
           <div>
-            <h3 className="text-white font-bold text-lg mb-6 uppercase tracking-wider">Liens Rapides</h3>
-            <ul className="space-y-3 font-light text-slate-400">
-              <li><Link to="/about" className="hover:text-brand-yellow transition-colors">Notre Entreprise</Link></li>
-              <li><Link to="/services" className="hover:text-brand-yellow transition-colors">Nos Services</Link></li>
-              <li><Link to="/tracking" className="hover:text-brand-yellow transition-colors">Suivi de Colis</Link></li>
-              <li><Link to="/contact" className="hover:text-brand-yellow transition-colors">Contact / Billetterie</Link></li>
+            <h3 className="text-white font-bold text-xs sm:text-sm mb-4 sm:mb-6 uppercase tracking-wider text-brand-yellow">
+              Liens Rapides
+            </h3>
+            <ul className="space-y-3 font-light text-sm text-slate-400">
+              <li>
+                <Link to="/about" className="hover:text-brand-yellow transition-colors">
+                  Notre Histoire & Vision
+                </Link>
+              </li>
+              <li>
+                <Link to="/services" className="hover:text-brand-yellow transition-colors">
+                  Prestations & Tarifs
+                </Link>
+              </li>
+              <li>
+                <Link to="/tracking" className="hover:text-brand-yellow transition-colors">
+                  Suivi de Colis & Fret
+                </Link>
+              </li>
+              <li>
+                <Link to="/booking" className="hover:text-brand-yellow transition-colors">
+                  Réservation Billetterie
+                </Link>
+              </li>
+              <li>
+                <Link to="/contact" className="hover:text-brand-yellow transition-colors">
+                  Nos Agences & Contacts
+                </Link>
+              </li>
             </ul>
           </div>
 
           {/* Services */}
           <div>
-            <h3 className="text-white font-bold text-lg mb-6 uppercase tracking-wider">Services</h3>
-            <ul className="space-y-3 font-light text-slate-400">
-              <li className="hover:text-brand-yellow transition-colors cursor-pointer">Voyage Classique</li>
-              <li className="hover:text-brand-yellow transition-colors cursor-pointer">Voyage VIP</li>
-              <li className="hover:text-brand-yellow transition-colors cursor-pointer">Expédition de Colis</li>
-              <li className="hover:text-brand-yellow transition-colors cursor-pointer">Courrier Express</li>
-              <li className="hover:text-brand-yellow transition-colors cursor-pointer">Location de Bus</li>
+            <h3 className="text-white font-bold text-xs sm:text-sm mb-4 sm:mb-6 uppercase tracking-wider text-brand-yellow">
+              Nos Lignes
+            </h3>
+            <ul className="space-y-3 font-light text-sm text-slate-400">
+              <li>Voyage Standard Climatisé</li>
+              <li>Liaison VIP Brazza ⇄ Pointe-Noire</li>
+              <li>Ligne Directe Oyo ⇄ Brazzaville</li>
+              <li>Fret & Colis Express Sécurisé</li>
+              <li>Privatisation de Bus sur mesure</li>
             </ul>
           </div>
 
           {/* Contact Info */}
           <div>
-            <h3 className="text-white font-bold text-lg mb-6 uppercase tracking-wider">Contact</h3>
-            <ul className="space-y-4 font-light text-slate-400">
+            <h3 className="text-white font-bold text-xs sm:text-sm mb-4 sm:mb-6 uppercase tracking-wider text-brand-yellow">
+              Contact Direct
+            </h3>
+            <ul className="space-y-4 font-light text-sm text-slate-400">
               <li className="flex items-start group">
-                <MapPin className="text-brand-yellow mr-4 mt-1 shrink-0 group-hover:scale-110 transition-transform" size={20} />
-                <span>Siège: Rond-point du 31 Juillet<br/>Pointe-Noire, Congo</span>
+                <MapPin
+                  className="text-brand-yellow mr-3.5 mt-0.5 shrink-0 group-hover:scale-110 transition-transform"
+                  size={18}
+                />
+                <span>
+                  Rond-point du 31 Juillet
+                  <br />
+                  Pointe-Noire, République du Congo
+                </span>
               </li>
               <li className="flex items-center group">
-                <Phone className="text-brand-yellow mr-4 shrink-0 group-hover:scale-110 transition-transform" size={20} />
-                <span>{settings?.phone || '+242 06 167 1X XX'}</span>
+                <Phone
+                  className="text-brand-yellow mr-3.5 shrink-0 group-hover:scale-110 transition-transform"
+                  size={18}
+                />
+                <div>
+                  <span className="text-[10px] text-brand-yellow uppercase tracking-wider block font-bold leading-none mb-1">
+                    Numéro Unique
+                  </span>
+                  <a href="tel:061671717" className="hover:text-white transition-colors font-bold text-white">
+                    {settings?.phone || '06 167 17 17'}
+                  </a>
+                </div>
               </li>
               <li className="flex items-center group">
-                <MessageCircle className="text-brand-yellow mr-4 shrink-0 group-hover:scale-110 transition-transform" size={20} />
-                <span>{settings?.whatsapp || 'Non disponible'}</span>
+                <MessageCircle
+                  className="text-emerald-400 mr-3.5 shrink-0 group-hover:scale-110 transition-transform"
+                  size={18}
+                />
+                <div>
+                  <span className="text-[10px] text-emerald-400 uppercase tracking-wider block font-bold leading-none mb-1">
+                    WhatsApp Assistance
+                  </span>
+                  <a
+                    href="https://wa.me/242061671717"
+                    target="_blank"
+                    rel="noreferrer"
+                    className="hover:text-emerald-400 text-white font-bold transition-colors"
+                  >
+                    {settings?.whatsapp || '+242 06 167 17 17'}
+                  </a>
+                </div>
               </li>
               <li className="flex items-center group">
-                <Mail className="text-brand-yellow mr-4 shrink-0 group-hover:scale-110 transition-transform" size={20} />
-                <span>contact@nzokotransport.com</span>
+                <Mail
+                  className="text-brand-yellow mr-3.5 shrink-0 group-hover:scale-110 transition-transform"
+                  size={18}
+                />
+                <a
+                  href="mailto:contact@nzokotransport.com"
+                  className="hover:text-white transition-colors truncate"
+                >
+                  contact@nzokotransport.com
+                </a>
               </li>
             </ul>
           </div>
-
         </div>
       </div>
-      
+
       {/* Bottom Bar */}
       <div className="border-t border-white/10 py-6">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center text-sm text-slate-500 font-medium">
-          <p className="font-light">&copy; {new Date().getFullYear()} {settings?.name || 'Nzoko Transport'}. Tous droits réservés.</p>
-          <div className="flex space-x-6 mt-4 md:mt-0 font-light">
-            <Link to="/admin/login" className="hover:text-brand-yellow transition-colors tracking-widest uppercase text-xs">Espace Admin</Link>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center text-xs text-slate-500 font-medium space-y-3 md:space-y-0">
+          <p className="font-light">
+            &copy; {new Date().getFullYear()} {settings?.name || 'Nzoko Transport'}. Tous droits réservés.
+          </p>
+          <div className="flex items-center space-x-6 font-light">
+            <span className="text-slate-400">« Na kimia, bozali na Nzoko »</span>
+            <span className="text-slate-600">|</span>
+            <Link
+              to="/admin/login"
+              className="hover:text-brand-yellow transition-colors tracking-widest uppercase text-[11px]"
+            >
+              Espace Admin
+            </Link>
           </div>
         </div>
       </div>

@@ -1,153 +1,241 @@
-import { Bus, Package, Ticket, Shield, Clock, Map, ArrowRight } from 'lucide-react';
+import React, { useState } from 'react';
+import { Crown, Package, MapPin, CheckCircle2, ArrowRight, Phone, Car, Gift } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { heroBus, vipInterior } from '../../assets/images';
+import StopsModal from '../../components/common/StopsModal';
+import BusPrivatizationModal from '../../components/common/BusPrivatizationModal';
+import TombolaModal from '../../components/common/TombolaModal';
+import NzokoElephantLogo from '../../components/common/NzokoElephantLogo';
 
 export default function Services() {
-  const services = [
-    {
-      icon: Ticket,
-      title: 'Voyage VIP Prestige',
-      desc: 'Une expérience premium : sièges très larges inclinables, espace supplémentaire pour les jambes, collation à bord et service exclusif par nos hôtesses. L\'art de voyager sans compromis.',
-      colSpan: 'lg:col-span-8',
-      bgType: 'dark',
-    },
-    {
-      icon: Bus,
-      title: 'Voyage Classique',
-      desc: 'Trajets réguliers sur nos axes majeurs à bord de bus confortables et parfaitement entretenus.',
-      colSpan: 'lg:col-span-4',
-      bgType: 'light',
-    },
-    {
-      icon: Package,
-      title: 'Fret & Colis Express',
-      desc: 'Expédition de vos plis et colis volumineux. Service ultra-rapide, sécurisé et traçable en temps réel.',
-      colSpan: 'lg:col-span-5',
-      bgType: 'light',
-    },
-    {
-      icon: Shield,
-      title: 'Sécurité Maximale',
-      desc: 'Chauffeurs hautement qualifiés, véhicules bridés par satellite, et suivi GPS continu de la flotte.',
-      colSpan: 'lg:col-span-7',
-      bgType: 'yellow',
-    },
-  ];
+  const [stopsModalOpen, setStopsModalOpen] = useState(false);
+  const [privatizationModalOpen, setPrivatizationModalOpen] = useState(false);
+  const [tombolaModalOpen, setTombolaModalOpen] = useState(false);
 
   return (
     <div className="bg-brand-cream min-h-screen">
-      {/* Immersive Header */}
-      <div className="relative bg-brand-dark pt-32 pb-48 overflow-hidden">
+      {/* Header */}
+      <div className="relative bg-brand-dark pt-12 sm:pt-20 md:pt-28 pb-20 sm:pb-28 overflow-hidden text-white">
         <div className="absolute inset-0">
-          <div className="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-l from-brand-yellow/10 to-transparent blur-3xl"></div>
-          <div className="absolute bottom-0 left-0 w-1/2 h-1/2 bg-gradient-to-tr from-white/5 to-transparent blur-2xl"></div>
+          <img
+            src={heroBus}
+            alt="Flotte de bus Nzoko"
+            className="w-full h-full object-cover opacity-25"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-brand-dark via-brand-dark/90 to-brand-dark/70" />
         </div>
-        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center pt-8">
-          <div className="inline-flex items-center space-x-2 bg-white/5 backdrop-blur-md border border-white/10 rounded-full px-5 py-2 mb-8">
-            <span className="text-brand-cream font-medium text-sm tracking-widest uppercase">Offre Complète</span>
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center pt-2 sm:pt-4">
+          <div className="inline-flex items-center space-x-2 bg-white/10 backdrop-blur-md border border-white/20 rounded-full px-3.5 py-1.5 sm:px-5 sm:py-2 mb-4">
+            <NzokoElephantLogo size={20} />
+            <span className="text-brand-yellow font-black text-xs tracking-widest uppercase">
+              Gamme Complète
+            </span>
           </div>
-          <h1 className="text-4xl md:text-6xl lg:text-[4.5rem] font-bold text-white mb-6 tracking-tight leading-[1.1]">
-            L'excellence de <br/><span className="text-brand-yellow italic">nos prestations.</span>
+          <h1 className="text-3xl sm:text-5xl md:text-6xl font-black text-white mb-3 sm:mb-5 tracking-tight leading-tight">
+            L'excellence de <br />
+            <span className="text-brand-yellow">nos prestations.</span>
           </h1>
-          <p className="text-lg md:text-xl text-slate-300 max-w-3xl mx-auto font-light leading-relaxed">
-            Nous avons conçu nos services pour répondre à vos exigences les plus hautes : de la ponctualité à l'acheminement de vos colis précieux.
+          <p className="text-xs sm:text-base md:text-lg text-slate-300 max-w-2xl mx-auto font-light leading-relaxed">
+            Voyages réguliers, affrètement VIP, transport de colis ou concours exclusifs : découvrez l'ensemble des solutions de mobilité signées Nzoko Transport.
           </p>
         </div>
       </div>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -mt-32 pb-32 relative z-20">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 md:gap-8">
-          {services.map((service, index) => {
-            const Icon = service.icon;
-            const isDark = service.bgType === 'dark';
-            const isYellow = service.bgType === 'yellow';
-            const isLight = service.bgType === 'light';
-            
-            return (
-              <div 
-                key={index} 
-                className={`group rounded-[2.5rem] p-8 md:p-12 relative overflow-hidden transition-all duration-700 ${service.colSpan} ${
-                  isDark ? 'bg-brand-dark text-white border border-white/10 shadow-2xl shadow-brand-dark/20' : 
-                  isYellow ? 'bg-brand-yellow text-brand-dark border border-brand-yellow shadow-xl shadow-brand-yellow/20' : 
-                  'bg-white text-brand-dark border border-slate-200/60 shadow-xl shadow-slate-200/10 hover:-translate-y-2 hover:shadow-[0_20px_50px_rgba(10,28,39,0.08)]'
-                }`}
+      {/* Main Content */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -mt-10 sm:-mt-16 pb-16 sm:pb-24 relative z-20 space-y-6 sm:space-y-8">
+        {/* VIP Section */}
+        <div className="bg-white rounded-3xl overflow-hidden border border-slate-200/80 shadow-xl grid grid-cols-1 lg:grid-cols-12 items-center">
+          <div className="lg:col-span-5 h-64 sm:h-80 lg:h-full relative overflow-hidden">
+            <img src={vipInterior} alt="Intérieur VIP Nzoko" className="w-full h-full object-cover" />
+            <div className="absolute top-4 left-4 bg-brand-dark text-brand-yellow text-xs font-black px-3 py-1.5 rounded-full uppercase tracking-wider shadow-lg">
+              Classe VIP & Confort
+            </div>
+          </div>
+          <div className="lg:col-span-7 p-6 sm:p-10 space-y-4">
+            <div className="flex items-center space-x-2 text-brand-yellow text-xs font-black uppercase tracking-widest">
+              <Crown size={14} />
+              <span>Haut de Gamme</span>
+            </div>
+            <h2 className="text-2xl sm:text-3xl font-black text-brand-dark tracking-tight">
+              Voyage VIP Prestige
+            </h2>
+            <p className="text-xs sm:text-sm text-slate-600 font-light leading-relaxed">
+              Une expérience d'exception entre Brazzaville et Pointe-Noire : sièges inclinables grand format, espace aux jambes étendu, prises 220V et chargeurs USB à chaque place, climatisation feutrée et collation soignée servie par votre hôtesse de bord.
+            </p>
+            <div className="grid grid-cols-2 gap-2.5 pt-1 text-xs text-slate-700">
+              <div className="flex items-center space-x-2">
+                <CheckCircle2 size={15} className="text-brand-yellow shrink-0" />
+                <span>Sièges ergonomiques cuir</span>
+              </div>
+              <div className="flex items-center space-x-2">
+                <CheckCircle2 size={15} className="text-brand-yellow shrink-0" />
+                <span>Wi-Fi illimité à bord</span>
+              </div>
+              <div className="flex items-center space-x-2">
+                <CheckCircle2 size={15} className="text-brand-yellow shrink-0" />
+                <span>Collation & rafraîchissement</span>
+              </div>
+              <div className="flex items-center space-x-2">
+                <CheckCircle2 size={15} className="text-brand-yellow shrink-0" />
+                <span>Embarquement prioritaire</span>
+              </div>
+            </div>
+            <div className="pt-2">
+              <Link
+                to="/booking"
+                className="inline-flex items-center bg-brand-yellow text-brand-dark font-bold text-xs uppercase tracking-widest px-6 py-3 rounded-xl hover:bg-amber-400 transition-colors shadow-sm"
               >
-                {/* Decorative Icon Background */}
-                <div className={`absolute -bottom-10 -right-10 pointer-events-none transition-transform duration-1000 group-hover:scale-125 group-hover:-rotate-12 ${
-                  isDark ? 'text-white/5' : isYellow ? 'text-brand-dark/5' : 'text-slate-100'
-                }`}>
-                  <Icon size={isDark ? 300 : 250} />
-                </div>
-
-                <div className="relative z-10 flex flex-col h-full justify-between">
-                  <div className={`w-16 h-16 rounded-2xl flex items-center justify-center mb-10 transition-colors duration-500 ${
-                    isDark ? 'bg-brand-yellow text-brand-dark' : 
-                    isYellow ? 'bg-white/40 text-brand-dark' : 
-                    'bg-brand-cream text-brand-yellow group-hover:bg-brand-yellow group-hover:text-white'
-                  }`}>
-                    <Icon size={32} strokeWidth={isDark ? 2 : 1.5} />
-                  </div>
-                  
-                  <div>
-                    <h3 className={`text-3xl lg:text-4xl font-bold mb-4 tracking-tight ${isDark || isYellow ? '' : 'text-brand-dark'}`}>
-                      {service.title}
-                    </h3>
-                    <p className={`text-lg leading-relaxed font-light ${
-                      isDark ? 'text-slate-300' : isYellow ? 'text-brand-dark/80 font-medium' : 'text-slate-600'
-                    }`}>
-                      {service.desc}
-                    </p>
-                  </div>
-                </div>
-              </div>
-            );
-          })}
+                <span>Réserver un siège VIP</span>
+                <ArrowRight size={15} className="ml-2" />
+              </Link>
+            </div>
+          </div>
         </div>
 
-        {/* Informational Sub-blocks */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-8">
-           <div className="bg-white rounded-[2rem] p-6 md:p-10 border border-slate-200/60 flex items-center shadow-sm">
-              <div className="bg-brand-cream w-14 h-14 rounded-2xl flex items-center justify-center shrink-0 mr-6">
-                 <Clock className="text-brand-yellow" size={24} />
+        {/* 2-Column: Privatisation & Tombola */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          {/* Privatisation */}
+          <div className="bg-brand-dark text-white rounded-3xl p-6 sm:p-8 flex flex-col justify-between border border-white/10 shadow-lg relative overflow-hidden">
+            <div className="absolute -bottom-10 -right-10 opacity-10 text-brand-yellow pointer-events-none">
+              <Car size={220} />
+            </div>
+            <div className="relative z-10 space-y-3">
+              <div className="w-12 h-12 rounded-2xl bg-brand-yellow/20 text-brand-yellow flex items-center justify-center">
+                <Car size={24} />
               </div>
-              <div>
-                 <h4 className="font-bold text-brand-dark text-lg mb-1 tracking-tight">Ponctualité Rigoureuse</h4>
-                 <p className="text-slate-500 font-light">Le respect de votre temps est notre priorité numéro un.</p>
+              <span className="text-[10px] text-brand-yellow uppercase tracking-widest font-black block">
+                Sur Devis Gratuit
+              </span>
+              <h3 className="text-xl sm:text-2xl font-black text-white">Privatisation de Bus</h3>
+              <p className="text-xs sm:text-sm text-slate-300 font-light leading-relaxed">
+                Affrétez un bus complet pour vos événements : séminaires d'entreprises, mariages, délégations officielles, pèlerinages religieux ou voyages de groupe personnalisés.
+              </p>
+            </div>
+            <div className="pt-6 relative z-10 flex items-center space-x-3">
+              <button
+                onClick={() => setPrivatizationModalOpen(true)}
+                className="bg-brand-yellow hover:bg-amber-400 text-brand-dark font-bold text-xs uppercase tracking-wider px-5 py-3 rounded-xl transition-all shadow-md"
+              >
+                Demander un devis
+              </button>
+              <a
+                href="tel:061671717"
+                className="text-xs text-slate-300 hover:text-white flex items-center space-x-1"
+              >
+                <Phone size={13} className="text-brand-yellow" />
+                <span>06 167 17 17</span>
+              </a>
+            </div>
+          </div>
+
+          {/* Tombola */}
+          <div className="bg-gradient-to-br from-amber-50 to-white rounded-3xl p-6 sm:p-8 flex flex-col justify-between border border-amber-200 shadow-lg relative overflow-hidden">
+            <div className="absolute -bottom-10 -right-10 opacity-15 text-brand-yellow pointer-events-none">
+              <Gift size={220} />
+            </div>
+            <div className="relative z-10 space-y-3">
+              <div className="w-12 h-12 rounded-2xl bg-brand-yellow text-brand-dark flex items-center justify-center shadow-sm">
+                <Gift size={24} />
               </div>
-           </div>
-           
-           <div className="bg-white rounded-[2rem] p-6 md:p-10 border border-slate-200/60 flex items-center shadow-sm">
-              <div className="bg-brand-cream w-14 h-14 rounded-2xl flex items-center justify-center shrink-0 mr-6">
-                 <Map className="text-brand-yellow" size={24} />
-              </div>
-              <div>
-                 <h4 className="font-bold text-brand-dark text-lg mb-1 tracking-tight">Réseau d'Agences</h4>
-                 <p className="text-slate-500 font-light">Des points de vente locaux pour faciliter vos démarches.</p>
-              </div>
-           </div>
+              <span className="text-[10px] text-brand-dark uppercase tracking-widest font-black block">
+                Jeu Concours Mensuel
+              </span>
+              <h3 className="text-xl sm:text-2xl font-black text-brand-dark">Grande Tombola Mensuelle</h3>
+              <p className="text-xs sm:text-sm text-slate-600 font-light leading-relaxed">
+                Une voiture Suzuki S-Presso mise en jeu chaque mois ! Achetez votre billet, ajoutez 1.000 FCFA pour participer au tirage au sort public retransmis en direct.
+              </p>
+            </div>
+            <div className="pt-6 relative z-10 flex items-center space-x-3">
+              <button
+                onClick={() => setTombolaModalOpen(true)}
+                className="bg-brand-dark hover:bg-slate-800 text-white font-bold text-xs uppercase tracking-wider px-5 py-3 rounded-xl transition-all shadow-md"
+              >
+                Règlement & Détails
+              </button>
+              <Link to="/booking" className="text-xs text-brand-dark font-bold hover:underline">
+                Acheter mon ticket
+              </Link>
+            </div>
+          </div>
         </div>
 
-        {/* CTA Section */}
-        <div className="mt-16 md:mt-24 bg-brand-dark rounded-[3rem] p-8 md:p-16 text-center shadow-2xl relative overflow-hidden group">
-           <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-brand-yellow/20 to-transparent opacity-50 group-hover:scale-150 transition-transform duration-1000"></div>
-           <div className="relative z-10 max-w-3xl mx-auto">
-             <h3 className="text-3xl md:text-5xl font-bold text-white mb-6 tracking-tight">
-               Prêt à vivre <span className="text-brand-yellow italic">l'expérience Nzoko</span> ?
-             </h3>
-             <p className="text-slate-300 font-light text-lg mb-10">
-               Réservez dès maintenant votre billet pour l'une de nos destinations ou contactez-nous pour l'envoi de vos colis.
-             </p>
-             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-               <Link to="/booking" className="w-full sm:w-auto px-10 py-5 bg-brand-yellow text-brand-dark font-bold uppercase tracking-widest text-sm rounded-2xl hover:bg-white hover:-translate-y-1 hover:shadow-xl transition-all duration-300">
-                 Effectuer une réservation
-               </Link>
-               <Link to="/tracking" className="w-full sm:w-auto px-10 py-5 bg-white/10 backdrop-blur-md text-white border border-white/20 font-bold uppercase tracking-widest text-sm rounded-2xl hover:bg-white/20 transition-all duration-300">
-                 Suivre un colis
-               </Link>
-             </div>
-           </div>
+        {/* 2-Column: Colis & Arrêts */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200/80 shadow-md flex flex-col justify-between space-y-4">
+            <div className="space-y-3">
+              <div className="w-12 h-12 rounded-2xl bg-brand-cream text-brand-yellow flex items-center justify-center">
+                <Package size={24} />
+              </div>
+              <h3 className="text-xl sm:text-2xl font-black text-brand-dark">Courrier & Fret Express</h3>
+              <p className="text-xs sm:text-sm text-slate-600 font-light leading-relaxed">
+                Acheminement rapide de vos plis confidentiels, cartons et marchandises entre nos différentes agences avec suivi par numéro de colis sécurisé.
+              </p>
+            </div>
+            <div className="pt-2">
+              <Link
+                to="/tracking"
+                className="inline-flex items-center text-xs font-bold text-brand-dark hover:text-brand-yellow uppercase tracking-wider"
+              >
+                <span>Accéder au suivi colis</span>
+                <ArrowRight size={14} className="ml-1.5" />
+              </Link>
+            </div>
+          </div>
+
+          <div className="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200/80 shadow-md flex flex-col justify-between space-y-4">
+            <div className="space-y-3">
+              <div className="w-12 h-12 rounded-2xl bg-brand-cream text-brand-yellow flex items-center justify-center">
+                <MapPin size={24} />
+              </div>
+              <h3 className="text-xl sm:text-2xl font-black text-brand-dark">Réseau d'Arrêts Urbains</h3>
+              <p className="text-xs sm:text-sm text-slate-600 font-light leading-relaxed">
+                Montez et descendez au plus près de votre lieu de résidence : Ngoyo, Nkouikou, Siafoumou, Mpaka, Tié-Tié, Mafouta, Château d'Eau, Kintélé...
+              </p>
+            </div>
+            <div className="pt-2">
+              <button
+                onClick={() => setStopsModalOpen(true)}
+                className="inline-flex items-center text-xs font-bold text-brand-dark hover:text-brand-yellow uppercase tracking-wider"
+              >
+                <span>Consulter la carte des arrêts</span>
+                <ArrowRight size={14} className="ml-1.5" />
+              </button>
+            </div>
+          </div>
         </div>
 
+        {/* Hotline CTA */}
+        <div className="bg-brand-dark rounded-3xl p-6 sm:p-10 text-center shadow-xl text-white border border-white/10 space-y-4">
+          <NzokoElephantLogo size={36} className="mx-auto" />
+          <h3 className="text-xl sm:text-3xl font-black text-white">Besoin d'une information immédiate ?</h3>
+          <p className="text-xs sm:text-sm text-slate-300 font-light max-w-md mx-auto">
+            Notre centre de relation client vous accueille au numéro unique officiel <strong>06 167 17 17</strong> 7j/7.
+          </p>
+          <div className="pt-2 flex flex-col sm:flex-row items-center justify-center gap-3">
+            <a
+              href="tel:061671717"
+              className="w-full sm:w-auto bg-brand-yellow text-brand-dark font-bold text-xs uppercase tracking-widest px-6 py-3 rounded-xl hover:bg-amber-400 transition-colors shadow-md flex items-center justify-center space-x-2"
+            >
+              <Phone size={15} />
+              <span>Appeler le 06 167 17 17</span>
+            </a>
+            <Link
+              to="/booking"
+              className="w-full sm:w-auto bg-white/10 text-white font-bold text-xs uppercase tracking-widest px-6 py-3 rounded-xl hover:bg-white/20 transition-colors border border-white/20 text-center"
+            >
+              Réserver en ligne
+            </Link>
+          </div>
+        </div>
       </div>
+
+      {/* Modals */}
+      <StopsModal isOpen={stopsModalOpen} onClose={() => setStopsModalOpen(false)} />
+      <BusPrivatizationModal
+        isOpen={privatizationModalOpen}
+        onClose={() => setPrivatizationModalOpen(false)}
+      />
+      <TombolaModal isOpen={tombolaModalOpen} onClose={() => setTombolaModalOpen(false)} />
     </div>
   );
 }
