@@ -13,24 +13,23 @@ export default function StopsModal({ isOpen, onClose }: StopsModalProps) {
   if (!isOpen) return null;
 
   const pointeNoireStops = [
-    { name: 'Agence 31 Juillet', type: 'Siège Principal', desc: 'Rond-point du 31 Juillet, Centre-ville', badge: 'Départs VIP & Standard' },
-    { name: 'Ngoyo', type: 'Arrêt & Guichet', desc: 'Axe principal Ngoyo, arrêt minute & billetterie' },
-    { name: 'Nkouikou', type: 'Arrêt & Guichet', desc: 'Grand marché Nkouikou, zone commerciale' },
-    { name: 'Siafoumou', type: 'Arrêt & Point relais', desc: 'Carrefour Siafoumou' },
-    { name: 'Pont Tié-Tié', type: 'Arrêt & Relais', desc: 'Zone Tié-Tié, correspondance rapide' },
-    { name: 'Mpaka', type: 'Arrêt Voyageur', desc: 'Avenue principale Mpaka' },
-    { name: 'Vindoulou', type: 'Arrêt Voyageur', desc: 'Axe sortie nord Vindoulou' },
-    { name: 'Voungou', type: 'Arrêt Voyageur', desc: 'Zone Voungou' },
+    { name: 'Agence du 31 Juillet', type: 'Gare Principale', desc: 'Rond-point du 31 Juillet, Centre-ville', badge: 'VIP & Standard' },
+    { name: 'Agence de Ngoyo', type: 'Guichet', desc: 'Avenue principale Ngoyo' },
+    { name: 'Agence de Nkouikou', type: 'Guichet', desc: 'Grand marché Nkouikou' },
+    { name: 'Agence de Siafoumou', type: 'Guichet', desc: 'Carrefour Siafoumou' },
+    { name: 'Agence de Tié-Tié', type: 'Guichet', desc: 'Zone commerciale Tié-Tié' },
+    { name: 'Agence de Mpaka', type: 'Guichet', desc: 'Avenue principale Mpaka' },
+    { name: 'Agence de Vindoulou', type: 'Guichet', desc: 'Sortie Nord RN1' },
   ];
 
-  const brazzavilleStops = [
-    { name: 'Mpila', type: 'Agence Principale', desc: 'Quartier Mpila, proximité port fluvial', badge: 'Gare Centrale' },
-    { name: "Château d'Eau", type: 'Arrêt & Billetterie', desc: "Rond-point Château d'eau, Makélékélé" },
-    { name: 'Mafouta', type: 'Arrêt & Guichet', desc: 'Sud de Brazzaville, sortie RN1' },
-    { name: 'Kintélé', type: 'Arrêt & Relais', desc: 'Axe Nord, direction Oyo & Gamboma' },
-    { name: 'La Tsiémé', type: 'Arrêt & Billetterie', desc: 'Talangaï / La Tsiémé' },
-    { name: 'Nkombo', type: 'Arrêt Voyageur', desc: 'Rond-point Nkombo' },
-    { name: 'Moungali', type: 'Point Billetterie', desc: 'Arrondissement 4 Moungali' },
+  const brazzavilleStops: { name: string; type: string; desc: string; badge?: string }[] = [
+    { name: 'Agence de Mpila', type: 'Gare Centrale', desc: 'Quartier Mpila, proximité port fluvial', badge: 'VIP & Standard' },
+    { name: "Agence de Château d'Eau", type: 'Guichet', desc: "Rond-point Château d'eau, Makélékélé" },
+    { name: 'Agence de La Tsiémé', type: 'Guichet', desc: 'Talangaï / La Tsiémé' },
+    { name: 'Agence de Moungali', type: 'Guichet', desc: 'Arrondissement 4 Moungali' },
+    { name: 'Agence de Mafouta', type: 'Guichet', desc: 'Sortie Sud RN1' },
+    { name: 'Agence de Kintélé', type: 'Guichet', desc: 'Axe Nord RN2' },
+    { name: 'Agence de Nkombo', type: 'Guichet', desc: 'Rond-point Nkombo' },
   ];
 
   const interurbanLines = [

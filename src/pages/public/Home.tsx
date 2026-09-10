@@ -22,6 +22,7 @@ import StopsModal from '../../components/common/StopsModal';
 import BusPrivatizationModal from '../../components/common/BusPrivatizationModal';
 import TombolaModal from '../../components/common/TombolaModal';
 import NzokoElephantLogo from '../../components/common/NzokoElephantLogo';
+import QuickBookingBar from '../../components/common/QuickBookingBar';
 
 export default function Home() {
   const [stopsModalOpen, setStopsModalOpen] = useState(false);
@@ -191,6 +192,13 @@ export default function Home() {
               <span>Nos Arrêts</span>
             </button>
           </div>
+        </div>
+      </section>
+
+      {/* Quick Booking Bar Section */}
+      <section className="py-6 sm:py-8 bg-brand-cream/80 border-b border-slate-200/80">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <QuickBookingBar />
         </div>
       </section>
 

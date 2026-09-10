@@ -173,7 +173,11 @@ export default function BusPrivatizationModal({ isOpen, onClose }: BusPrivatizat
                   </label>
                   <select
                     value={formData.departure}
-                    onChange={(e) => setFormData({ ...formData, departure: e.target.value })}
+                    onChange={(e) => {
+                      const newDep = e.target.value;
+                      const newDest = formData.destination === newDep ? (newDep === 'Brazzaville' ? 'Pointe-Noire' : 'Brazzaville') : formData.destination;
+                      setFormData({ ...formData, departure: newDep, destination: newDest });
+                    }}
                     className="w-full bg-white border border-slate-200 rounded-xl px-3.5 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-brand-yellow"
                   >
                     <option>Brazzaville</option>
@@ -193,12 +197,11 @@ export default function BusPrivatizationModal({ isOpen, onClose }: BusPrivatizat
                     onChange={(e) => setFormData({ ...formData, destination: e.target.value })}
                     className="w-full bg-white border border-slate-200 rounded-xl px-3.5 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-brand-yellow"
                   >
-                    <option>Pointe-Noire</option>
-                    <option>Brazzaville</option>
-                    <option>Oyo</option>
-                    <option>Dolisie</option>
-                    <option>Nkayi</option>
-                    <option>Circuit sur mesure</option>
+                    {['Pointe-Noire', 'Brazzaville', 'Oyo', 'Dolisie', 'Nkayi', 'Circuit sur mesure']
+                      .filter(dest => dest !== formData.departure)
+                      .map(dest => (
+                        <option key={dest}>{dest}</option>
+                      ))}
                   </select>
                 </div>
               </div>
