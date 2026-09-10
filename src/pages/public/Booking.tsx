@@ -312,26 +312,26 @@ export default function Booking() {
               {/* Travel Specs */}
               <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 py-4 border-b border-white/15 text-xs">
                 <div>
-                  <span className="text-[10px] text-slate-400 uppercase tracking-wider block">
+                  <span className="text-[10px] text-slate-400 uppercase tracking-wider block font-medium">
                     Date du voyage
                   </span>
-                  <span className="font-bold text-white text-sm">
+                  <span className="font-normal text-slate-100 text-sm">
                     {confirmedReservation.date}
                   </span>
                 </div>
                 <div>
-                  <span className="text-[10px] text-slate-400 uppercase tracking-wider block">
+                  <span className="text-[10px] text-slate-400 uppercase tracking-wider block font-medium">
                     Heure de départ
                   </span>
-                  <span className="font-bold text-brand-yellow text-sm">
+                  <span className="font-medium text-brand-yellow text-sm">
                     {confirmedReservation.timeSlot}
                   </span>
                 </div>
                 <div>
-                  <span className="text-[10px] text-slate-400 uppercase tracking-wider block">
+                  <span className="text-[10px] text-slate-400 uppercase tracking-wider block font-medium">
                     Passagers & Classe
                   </span>
-                  <span className="font-bold text-white text-sm">
+                  <span className="font-medium text-slate-100 text-sm">
                     {confirmedReservation.passengersCount} place(s) •{' '}
                     {confirmedReservation.travelClass.toUpperCase()}
                   </span>
@@ -436,7 +436,7 @@ export default function Booking() {
 
   // MAIN BOOKING COCKPIT (RECTANGULAR, BALANCED, WIDE)
   return (
-    <div className="bg-brand-cream min-h-screen pt-24 sm:pt-28 pb-20">
+    <div className="bg-brand-cream min-h-screen pt-24 sm:pt-28 pb-36 sm:pb-20">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6">
         {/* Header Title & Subtitle */}
         <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-2 border-b border-slate-200 pb-4">
@@ -517,7 +517,7 @@ export default function Booking() {
         </div>
 
         {/* MAIN 2-COLUMN BOOKING FORM */}
-        <form onSubmit={handleSubmit}>
+        <form id="booking-form" onSubmit={handleSubmit}>
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
             {/* LEFT COLUMN: TRAJET, HORAIRES, CLASSE & PASSAGER */}
             <div className="lg:col-span-7 space-y-5">
@@ -548,7 +548,7 @@ export default function Booking() {
                       <select
                         value={departureCity}
                         onChange={(e) => setDepartureCity(e.target.value)}
-                        className="w-full bg-white border border-slate-200 rounded-xl px-3 py-2 text-xs sm:text-sm font-black text-brand-dark focus:outline-none focus:ring-2 focus:ring-brand-yellow"
+                        className="w-full bg-white border border-slate-200 rounded-xl px-3 py-2 text-sm font-semibold text-slate-900 focus:outline-none focus:ring-2 focus:ring-brand-yellow"
                       >
                         {CITIES_DATA.map((c) => (
                           <option key={c.name} value={c.name}>
@@ -564,7 +564,7 @@ export default function Booking() {
                       <select
                         value={departureAgencyId}
                         onChange={(e) => setDepartureAgencyId(e.target.value)}
-                        className="w-full bg-white border border-slate-200 rounded-xl px-3 py-2 text-xs font-bold text-slate-800 focus:outline-none focus:ring-2 focus:ring-brand-yellow"
+                        className="w-full bg-white border border-slate-200 rounded-xl px-3 py-2 text-xs font-normal text-slate-600 focus:outline-none focus:ring-2 focus:ring-brand-yellow"
                       >
                         {departureAgencies.map((agency) => (
                           <option key={agency.id} value={agency.id}>
@@ -590,7 +590,7 @@ export default function Booking() {
                       <select
                         value={arrivalCity}
                         onChange={(e) => setArrivalCity(e.target.value)}
-                        className="w-full bg-white border border-slate-200 rounded-xl px-3 py-2 text-xs sm:text-sm font-black text-brand-dark focus:outline-none focus:ring-2 focus:ring-brand-yellow"
+                        className="w-full bg-white border border-slate-200 rounded-xl px-3 py-2 text-sm font-semibold text-slate-900 focus:outline-none focus:ring-2 focus:ring-brand-yellow"
                       >
                         {validArrivalCities.map((cityName) => (
                           <option key={cityName} value={cityName}>
@@ -606,7 +606,7 @@ export default function Booking() {
                       <select
                         value={arrivalAgencyId}
                         onChange={(e) => setArrivalAgencyId(e.target.value)}
-                        className="w-full bg-white border border-slate-200 rounded-xl px-3 py-2 text-xs font-bold text-slate-800 focus:outline-none focus:ring-2 focus:ring-brand-yellow"
+                        className="w-full bg-white border border-slate-200 rounded-xl px-3 py-2 text-xs font-normal text-slate-600 focus:outline-none focus:ring-2 focus:ring-brand-yellow"
                       >
                         {arrivalAgencies.map((agency) => (
                           <option key={agency.id} value={agency.id}>
@@ -641,7 +641,7 @@ export default function Booking() {
                       min={new Date().toISOString().split('T')[0]}
                       value={date}
                       onChange={(e) => setDate(e.target.value)}
-                      className="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2.5 text-xs sm:text-sm font-bold text-brand-dark focus:outline-none focus:ring-2 focus:ring-brand-yellow"
+                      className="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2.5 text-sm font-normal text-slate-700 focus:outline-none focus:ring-2 focus:ring-brand-yellow"
                     />
                   </div>
 
@@ -652,7 +652,7 @@ export default function Booking() {
                     <select
                       value={timeSlot}
                       onChange={(e) => setTimeSlot(e.target.value)}
-                      className="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2.5 text-xs sm:text-sm font-bold text-brand-dark focus:outline-none focus:ring-2 focus:ring-brand-yellow"
+                      className="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2.5 text-sm font-normal text-slate-700 focus:outline-none focus:ring-2 focus:ring-brand-yellow"
                     >
                       <option value="06h30">06h30 • Matin (1er Départ)</option>
                       <option value="12h00">12h00 • Midi Express</option>
@@ -667,7 +667,7 @@ export default function Booking() {
                     <select
                       value={passengersCount}
                       onChange={(e) => setPassengersCount(Number(e.target.value))}
-                      className="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2.5 text-xs sm:text-sm font-bold text-brand-dark focus:outline-none focus:ring-2 focus:ring-brand-yellow"
+                      className="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2.5 text-sm font-normal text-slate-700 focus:outline-none focus:ring-2 focus:ring-brand-yellow"
                     >
                       {[1, 2, 3, 4, 5, 6].map((n) => (
                         <option key={n} value={n}>
@@ -1036,6 +1036,44 @@ export default function Booking() {
             </div>
           </div>
         </form>
+      </div>
+
+      {/* STICKY MOBILE BOTTOM CHECKOUT BAR (Matches user capture with real-time total & payment mode) */}
+      <div className="fixed bottom-0 left-0 right-0 z-40 bg-brand-dark/95 backdrop-blur-md text-white border-t border-brand-yellow/30 shadow-[0_-8px_25px_rgba(0,0,0,0.35)] px-4 py-2.5 sm:hidden">
+        <div className="flex items-center justify-between gap-3">
+          {/* Left info: Net Total & Selected Mode */}
+          <div className="min-w-0 flex-1">
+            <div className="flex items-center justify-between pr-2">
+              <span className="text-[9px] font-bold uppercase tracking-wider text-sky-300 leading-none">
+                Net Total à Régler
+              </span>
+              <span className="text-[9px] uppercase tracking-wider text-slate-300">
+                Mode : <strong className="text-white font-bold">{paymentMethod === 'agency' ? 'Au Guichet' : 'Mobile Money'}</strong>
+              </span>
+            </div>
+            <div className="flex items-baseline space-x-1.5 mt-0.5">
+              <span className="text-xl font-black text-amber-400 tracking-tight leading-none">
+                {totalPrice.toLocaleString('fr-FR')}
+              </span>
+              <span className="text-xs font-bold text-amber-400">FCFA</span>
+              <span className="text-[10px] text-slate-400 font-normal truncate">
+                • {passengersCount} pl. ({travelClass.toUpperCase()})
+              </span>
+            </div>
+          </div>
+
+          {/* Right: Validation CTA Button */}
+          <button
+            type="submit"
+            form="booking-form"
+            disabled={loading}
+            className="bg-brand-yellow hover:bg-amber-400 text-brand-dark font-black text-xs uppercase tracking-wider px-3.5 py-2.5 rounded-xl flex items-center space-x-1.5 shadow-md active:scale-95 transition-all shrink-0 min-h-[42px]"
+          >
+            <ShieldCheck size={15} />
+            <span>{loading ? '...' : 'Valider'}</span>
+            <ArrowRight size={13} />
+          </button>
+        </div>
       </div>
     </div>
   );

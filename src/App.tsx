@@ -1,7 +1,9 @@
+import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import ScrollToTop from './components/ScrollToTop';
 import PublicLayout from './components/layout/PublicLayout';
 import AdminLayout from './components/layout/AdminLayout';
+import NzokoLoadingScreen from './components/common/NzokoLoadingScreen';
 
 // Public Pages
 import Home from './pages/public/Home';
@@ -21,9 +23,20 @@ import Messages from './pages/admin/Messages';
 import Settings from './pages/admin/Settings';
 
 export default function App() {
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    const handleReplay = () => setIsLoading(true);
+    window.addEventListener('replay-nzoko-loader', handleReplay);
+    return () => window.removeEventListener('replay-nzoko-loader', handleReplay);
+  }, []);
+
   return (
     <Router>
       <ScrollToTop />
+      {isLoading && (
+        <NzokoLoadingScreen onComplete={() => setIsLoading(false)} />
+      )}
       <Routes>
         {/* Public Routes */}
         <Route path="/" element={<PublicLayout />}>

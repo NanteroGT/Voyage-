@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { MapPin, Phone, Mail, Facebook, Instagram, Linkedin, MessageCircle } from 'lucide-react';
+import { MapPin, Phone, Mail, Facebook, Instagram, Linkedin, MessageCircle, RotateCcw } from 'lucide-react';
 import { useSettings } from '../../lib/useSettings';
 import NzokoElephantLogo from '../common/NzokoElephantLogo';
 
@@ -174,7 +174,17 @@ export default function Footer() {
             &copy; {new Date().getFullYear()} {settings?.name || 'Nzoko Transport'}. Tous droits réservés.
           </p>
           <div className="flex items-center space-x-6 font-light">
-            <span className="text-slate-400">« Na kimia, bozali na Nzoko »</span>
+            <span className="text-slate-400 hidden sm:inline">« Na kimia, bozali na Nzoko »</span>
+            <span className="text-slate-600 hidden sm:inline">|</span>
+            <button
+              type="button"
+              onClick={() => window.dispatchEvent(new Event('replay-nzoko-loader'))}
+              className="hover:text-brand-yellow text-slate-400 transition-colors flex items-center space-x-1.5 text-[11px]"
+              title="Revoir l'animation de démarrage"
+            >
+              <RotateCcw size={12} className="text-amber-400" />
+              <span>Animation d'embarquement</span>
+            </button>
             <span className="text-slate-600">|</span>
             <Link
               to="/admin/login"
