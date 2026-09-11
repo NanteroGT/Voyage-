@@ -84,26 +84,26 @@ export default function Home() {
             alt="Bus moderne Nzoko Transport"
             className="w-full h-full object-cover object-center lg:object-[76%_center] transition-transform duration-1000"
           />
-          {/* Gradients */}
-          <div className="absolute inset-0 bg-gradient-to-r from-[#071319]/92 via-[#071319]/60 via-40% to-transparent"></div>
-          <div className="absolute inset-0 bg-gradient-to-t from-[#071319]/80 via-transparent via-30% to-transparent pointer-events-none"></div>
+          {/* Gradients - lighter, clearer overlay letting the image and bus shine */}
+          <div className="absolute inset-0 bg-gradient-to-r from-[#071319]/60 via-[#071319]/25 via-45% to-transparent"></div>
+          <div className="absolute inset-0 bg-gradient-to-t from-[#071319]/35 via-transparent via-20% to-transparent pointer-events-none"></div>
         </div>
 
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-20 md:py-24 w-full">
           <div className="max-w-xl space-y-6 sm:space-y-6">
-            <div className="inline-flex items-center space-x-2 bg-black/40 backdrop-blur-md border border-white/15 rounded-full px-3.5 py-1.5 shadow-sm">
+            <div className="inline-flex items-center space-x-2 bg-black/25 backdrop-blur-md border border-white/20 rounded-full px-3.5 py-1.5 shadow-sm">
               <span className="w-2 h-2 rounded-full bg-brand-yellow animate-pulse"></span>
               <span className="text-brand-yellow font-bold text-[10px] sm:text-xs tracking-wider uppercase">
                 « Voyagez na kimia, bozali na Nzoko »
               </span>
             </div>
 
-            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black text-white leading-[1.15] tracking-tight drop-shadow-[0_2px_8px_rgba(0,0,0,0.7)]">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black text-white leading-[1.15] tracking-tight drop-shadow-[0_2px_4px_rgba(0,0,0,0.4)]">
               Voyagez dans le <br />
               <span className="text-brand-yellow">calme absolu.</span>
             </h1>
 
-            <p className="text-xs sm:text-base text-slate-200 leading-relaxed font-light drop-shadow-[0_1px_4px_rgba(0,0,0,0.8)]">
+            <p className="text-xs sm:text-base text-white/95 leading-relaxed font-normal drop-shadow-[0_1px_3px_rgba(0,0,0,0.5)]">
               La référence du transport interurbain au Congo. Confort climatisé, ponctualité et sécurité sur l'axe Brazzaville ⇄ Pointe-Noire.
             </p>
 
@@ -111,21 +111,21 @@ export default function Home() {
               <div className="flex flex-col sm:flex-row gap-3.5 sm:gap-3 items-stretch sm:items-center">
                 <Link
                   to="/booking"
-                  className="bg-brand-yellow hover:bg-amber-400 text-brand-dark px-7 py-3.5 rounded-xl font-black uppercase tracking-wider text-xs sm:text-sm flex items-center justify-center shadow-[0_8px_20px_rgba(245,166,35,0.35)] hover:-translate-y-0.5 transition-all min-h-[48px]"
+                  className="bg-brand-yellow hover:bg-amber-400 text-brand-dark px-7 py-3.5 rounded-xl font-black uppercase tracking-wider text-xs sm:text-sm flex items-center justify-center shadow-[0_8px_20px_rgba(245,166,35,0.3)] hover:-translate-y-0.5 transition-all min-h-[48px]"
                 >
                   <Ticket className="mr-2 shrink-0" size={18} />
                   <span>Acheter un billet</span>
                 </Link>
                 <Link
                   to="/tracking"
-                  className="bg-black/40 hover:bg-black/60 backdrop-blur-md text-white border border-white/20 px-5 py-3.5 rounded-xl font-semibold text-xs sm:text-sm flex items-center justify-center space-x-2 transition-all min-h-[48px]"
+                  className="bg-black/30 hover:bg-black/50 backdrop-blur-md text-white border border-white/25 px-5 py-3.5 rounded-xl font-semibold text-xs sm:text-sm flex items-center justify-center space-x-2 transition-all min-h-[48px]"
                 >
                   <Package size={16} className="text-brand-yellow" />
                   <span>Suivre un colis</span>
                 </Link>
               </div>
 
-              <div className="pt-3 sm:pt-2 flex flex-wrap items-center gap-x-4 gap-y-2.5 sm:gap-y-1.5 text-xs text-slate-300 font-light">
+              <div className="pt-3 sm:pt-2 flex flex-wrap items-center gap-x-4 gap-y-2.5 sm:gap-y-1.5 text-xs text-slate-100 font-normal drop-shadow-sm">
                 <span className="inline-flex items-center space-x-1">
                   <CheckCircle2 size={13} className="text-brand-yellow shrink-0" />
                   <span>100% Climatisé</span>
